@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 100% 98%;
+    --foreground: 25 50% 15%;
+    --card: 48 85% 95%;
+    --card-foreground: 25 50% 15%;
+    --popover: 48 85% 95%;
+    --popover-foreground: 25 50% 15%;
+    --primary: 35 95% 55%;
+    --primary-foreground: 45 100% 98%;
+    --secondary: 42 88% 75%;
+    --secondary-foreground: 25 50% 15%;
+    --muted: 44 75% 88%;
+    --muted-foreground: 25 30% 45%;
+    --accent: 28 85% 65%;
+    --accent-foreground: 25 50% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 45 100% 98%;
+    --border: 42 50% 85%;
+    --input: 42 50% 85%;
+    --ring: 35 95% 55%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 25 30% 8%;
+    --foreground: 48 85% 95%;
+    --card: 25 25% 12%;
+    --card-foreground: 48 85% 95%;
+    --popover: 25 25% 12%;
+    --popover-foreground: 48 85% 95%;
+    --primary: 35 95% 65%;
+    --primary-foreground: 25 30% 8%;
+    --secondary: 28 85% 55%;
+    --secondary-foreground: 48 85% 95%;
+    --muted: 25 20% 15%;
+    --muted-foreground: 44 40% 65%;
+    --accent: 42 88% 65%;
+    --accent-foreground: 25 30% 8%;
+    --destructive: 0 84% 70%;
+    --destructive-foreground: 25 30% 8%;
+    --border: 25 20% 20%;
+    --input: 25 20% 15%;
+    --ring: 35 95% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+  
+  /* Tropical button styles */
+  .btn-tropical {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-ocean {
+    @apply bg-gradient-to-r from-secondary to-teal-600 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-sunset {
+    @apply bg-gradient-to-r from-accent to-orange-600 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-lake {
+    @apply bg-gradient-to-r from-teal-500 to-secondary text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105;
+  }
+  
+  /* Tropical cards */
+  .card-tropical {
+    @apply bg-card/80 backdrop-blur-sm border-border/50 shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+  
+  /* Text gradients */
+  .text-gradient-tropical {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-ocean {
+    @apply bg-gradient-to-r from-secondary to-teal-600 bg-clip-text text-transparent;
+  }
+}
+
+/* Ko Lake Villa specific styles */
+.ko-lake-hero {
+  background: linear-gradient(135deg, hsl(43, 89%, 70%, 0.1), hsl(180, 65%, 45%, 0.1));
+}
+
+.ko-lake-nav {
+  background: linear-gradient(to right, hsl(var(--background)), hsl(var(--background)/0.95));
+  backdrop-filter: blur(10px);
+}
+
+.ko-lake-section {
+  @apply py-20 px-4;
+}
+
+.ko-lake-heading {
+  @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-gradient-tropical mb-6;
+}
+
+.ko-lake-subheading {
+  @apply font-serif text-2xl md:text-3xl font-semibold text-foreground/80 mb-4;
+}
+
+.ko-lake-text {
+  @apply font-sans text-lg text-muted-foreground leading-relaxed;
+}
+
+/* Animation classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero styles */
+.hero-bg {
+  background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-large {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.smooth-transition {
+  transition: all 0.3s ease;
+}
+
+/* Logo styles */
+.ko-lake-logo {
+  height: 2.5rem;
+  width: auto;
+  object-fit: contain;
+  transition: var(--transition-tropical);
+}
+
+.ko-lake-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation styles for two rows */
+.ko-lake-nav-primary {
+  @apply flex items-center justify-between py-3 border-b border-border/30;
+}
+
+.ko-lake-nav-secondary {
+  @apply flex items-center justify-center py-2 space-x-8;
+}
+
+.ko-lake-nav-item {
+  @apply text-foreground/80 hover:text-primary transition-colors duration-200 text-sm font-medium;
+}
+
+.ko-lake-nav-item-active {
+  @apply text-primary font-semibold;
+}
+
+/* Responsive utilities */
+.container-ko-lake {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
