@@ -23,11 +23,10 @@ export const Hero = ({ onBookingClick }: HeroProps) => {
             Ko Lake Villa
           </h1>
           <p className="text-xl md:text-2xl mb-4 text-white/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            Luxury Eco-Friendly Resort by Kandy Lake
+            Lakeside Villa in Ahangama
           </p>
           <p className="text-lg md:text-xl mb-8 text-white/80 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-            Experience the perfect blend of luxury and nature in our stunning lakeside villas. 
-            Sustainable hospitality meets breathtaking views.
+            60 foot lao pool, 350 yards from swim and surf and lake sanband next to garden
           </p>
           
           {/* Stats */}
