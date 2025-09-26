@@ -148,7 +148,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                     </a>
                     <div className="flex items-center space-x-3 text-muted-foreground">
                       <MapPin className="h-4 w-4" />
-                      <span>Kandy Lake, Sri Lanka</span>
+                      <span>Ahangama, Sri Lanka</span>
                     </div>
                   </div>
                   
