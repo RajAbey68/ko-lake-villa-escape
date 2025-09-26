@@ -125,15 +125,15 @@ INSERT INTO public.amenities (title, description, category, icon_name, is_featur
 
 -- Insert sample data for hero_content
 INSERT INTO public.hero_content (title, subtitle, description, image_url, image_alt, cta_text, cta_action, display_order) VALUES
-('Luxury Eco Villa by Kandy Lake', 'Sustainable Paradise', 'Experience the perfect blend of luxury and nature in our eco-friendly lakefront resort', '/placeholder.svg', 'Luxury villa overlooking Kandy Lake', 'Book Your Stay', 'booking', 1),
-('Serene Lake Views', 'Wake Up to Paradise', 'Every morning brings breathtaking views of the pristine lake surrounded by lush greenery', '/placeholder.svg', 'Sunrise over Kandy Lake from villa terrace', 'Explore Rooms', 'rooms', 2),
+('Luxury Eco Villa by Ahangama Lake', 'Sustainable Paradise', 'Experience the perfect blend of luxury and nature in our eco-friendly lakefront resort', '/placeholder.svg', 'Luxury villa overlooking Ahangama Lake', 'Book Your Stay', 'booking', 1),
+('Serene Lake Views', 'Wake Up to Paradise', 'Every morning brings breathtaking views of the pristine lake surrounded by lush greenery', '/placeholder.svg', 'Sunrise over Ahangama Lake from villa terrace', 'Explore Rooms', 'rooms', 2),
 ('Authentic Sri Lankan Experience', 'Culture & Comfort', 'Immerse yourself in local culture while enjoying world-class amenities and hospitality', '/placeholder.svg', 'Traditional Sri Lankan cultural performance at the resort', 'Discover More', 'amenities', 3);
 
 -- Insert sample data for location_info
 INSERT INTO public.location_info (title, description, address, coordinates, transport_options, nearby_attractions, contact_info) VALUES
-('Prime Location in Kandy', 
-'Nestled on the shores of the sacred Kandy Lake, Ko Lake Villa offers unparalleled access to Sri Lanka''s cultural capital', 
-'Lake Round, Kandy 20000, Sri Lanka',
+('Prime Location in Ahangama', 
+'Nestled on the shores of the pristine Ahangama Lake, Ko Lake Villa offers unparalleled access to Sri Lanka''s southern coastal paradise', 
+'Lake Round, Ahangama 80650, Sri Lanka',
 '7.2906° N, 80.6337° E',
 '{"airport": {"name": "Bandaranaike International Airport", "distance": "115 km", "duration": "2.5 hours"}, "train": {"station": "Kandy Railway Station", "distance": "2 km", "duration": "10 minutes"}, "taxi": {"availability": "24/7", "notes": "Direct pickup from hotel"}}',
 '{"temples": [{"name": "Temple of the Sacred Tooth Relic", "distance": "1.5 km"}, {"name": "Gadaladeniya Temple", "distance": "15 km"}], "gardens": [{"name": "Royal Botanical Gardens", "distance": "6 km"}, {"name": "Udawattakele Forest Reserve", "distance": "3 km"}], "cultural": [{"name": "Kandy Cultural Centre", "distance": "1 km"}, {"name": "National Museum", "distance": "2 km"}]}',
