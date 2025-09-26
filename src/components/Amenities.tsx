@@ -25,7 +25,7 @@ export const Amenities = () => {
     {
       icon: Waves,
       title: "Lake Access",
-      description: "Direct access to pristine Kandy Lake for swimming and water activities"
+      description: "Direct access to pristine lakeside for swimming and water activities"
     },
     {
       icon: TreePine,
