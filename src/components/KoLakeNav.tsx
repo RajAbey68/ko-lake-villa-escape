@@ -40,7 +40,7 @@ export function KoLakeNav({ onBookingClick }: KoLakeNavProps) {
     { 
       href: "#location", 
       label: "Location",
-      description: "Find us in Kandy, Sri Lanka"
+      description: "Find us in Ahangama, Sri Lanka"
     },
     { 
       href: "#contact", 
@@ -271,7 +271,7 @@ export function KoLakeNav({ onBookingClick }: KoLakeNavProps) {
                       </a>
                       <div className="flex items-center space-x-3 text-muted-foreground">
                         <MapPin className="h-4 w-4" />
-                        <span>Kandy Lake, Sri Lanka</span>
+                        <span>Ahangama, Sri Lanka</span>
                       </div>
                     </div>
                     <Button 
