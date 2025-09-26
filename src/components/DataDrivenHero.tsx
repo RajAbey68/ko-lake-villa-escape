@@ -91,10 +91,13 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground">
-              Welcome to Ko Lake Villa
+              Ko Lake Villa
             </h1>
             <p className="text-xl text-muted-foreground">
-              Luxury eco resort by the lake
+              Lakeside Villa in Ahangama
+            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              60 foot lao pool, 350 yards from swim and surf and lake sanband next to garden
             </p>
             <Button onClick={onBookingClick} size="lg" className="text-lg px-8 py-3">
               Book Now
