@@ -1,2 +1,3 @@
+# Ignore PostCSS config that breaks Vercel builds
 postcss.config.js
 postcss.config.cjs
