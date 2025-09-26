@@ -31,6 +31,13 @@ interface GuestyAvailabilityResponse {
 }
 
 export function GuestyBookingWidget({ onBookingSearch, className = "" }: GuestyBookingWidgetProps) {
+  // Guesty API environment variables
+  const apiKey = import.meta.env.VITE_GUESTY_API_KEY;
+  const baseUrl = import.meta.env.VITE_GUESTY_BASE_URL;
+
+  if (!apiKey || !baseUrl) {
+    console.warn("⚠️ Guesty API credentials missing.");
+  }
   const [searchParams, setSearchParams] = useState<BookingSearchParams>({
     propertyType: "",
     checkIn: "",

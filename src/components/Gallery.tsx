@@ -100,6 +100,7 @@ export const Gallery = () => {
                     className="w-full h-full object-cover aspect-square"
                     loading="lazy"
                     data-testid={`gallery-image-${item.id}`}
+                    onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/fallback.jpg'; }}
                   />
                 )}
                 
@@ -152,6 +153,7 @@ export const Gallery = () => {
                       autoPlay
                       poster={selectedItem.thumbnail_path || undefined}
                       data-testid="lightbox-video"
+                      onError={e => { console.error('Video failed to load:', selectedItem.object_path); }}
                     />
                   ) : (
                     <img
@@ -159,6 +161,7 @@ export const Gallery = () => {
                       alt={selectedItem.title}
                       className="max-w-full max-h-full object-contain"
                       data-testid="lightbox-image"
+                      onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/fallback.jpg'; }}
                     />
                   )}
                   
