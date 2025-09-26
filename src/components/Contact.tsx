@@ -71,9 +71,9 @@ export const Contact = ({ onBookingClick }: ContactProps) => {
     {
       icon: MapPin,
       title: "Address",
-      content: "Kandy Lake, Sri Lanka",
+      content: "Ahangama, Sri Lanka",
       description: "Central Province, 20000",
-      action: "https://maps.google.com/?q=Kandy+Lake,+Sri+Lanka"
+      action: "https://maps.google.com/?q=Ahangama,+Sri+Lanka"
     },
     {
       icon: Clock,
