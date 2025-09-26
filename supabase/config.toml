@@ -1,0 +1,16 @@
+project_id = "zctpyveoakvbrrjmviqg"
+
+[functions.firebase-contact-migrate]
+verify_jwt = false
+
+[functions.guesty-availability]
+verify_jwt = false
+
+[functions.guesty-api-test]
+verify_jwt = false
+
+[functions.guesty-property-details]
+verify_jwt = false
+
+[functions.guesty-calendar]
+verify_jwt = false
