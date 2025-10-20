@@ -79,18 +79,18 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
           {/* Contact Info */}
           <div className="hidden lg:flex items-center space-x-4 text-sm text-muted-foreground">
             <a 
-              href="tel:+94771234567" 
+              href="tel:+94711730345" 
               className="flex items-center space-x-1 hover:text-foreground transition-colors"
             >
               <Phone className="h-3 w-3" />
-              <span>+94 77 123 4567</span>
+              <span>+94711730345</span>
             </a>
             <a 
-              href="mailto:contact@kolakehouse.com"
+              href="mailto:contact@KoLakeHouse.com"
               className="flex items-center space-x-1 hover:text-foreground transition-colors"
             >
               <Mail className="h-3 w-3" />
-              <span>contact@kolakehouse.com</span>
+              <span>contact@KoLakeHouse.com</span>
             </a>
           </div>
 
@@ -133,18 +133,18 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                 <div className="border-t border-border px-6 py-6 space-y-4">
                   <div className="space-y-3 text-sm">
                     <a 
-                      href="tel:+94771234567"
+                      href="tel:+94711730345"
                       className="flex items-center space-x-3 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Phone className="h-4 w-4" />
-                      <span>+94 77 123 4567</span>
+                      <span>+94711730345</span>
                     </a>
                     <a 
-                      href="mailto:contact@kolakehouse.com"
+                      href="mailto:contact@KoLakeHouse.com"
                       className="flex items-center space-x-3 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Mail className="h-4 w-4" />
-                      <span>contact@kolakehouse.com</span>
+                      <span>contact@KoLakeHouse.com</span>
                     </a>
                     <div className="flex items-center space-x-3 text-muted-foreground">
                       <MapPin className="h-4 w-4" />
@@ -172,7 +172,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                       </Button>
                       <Button 
                         onClick={() => {
-                          onBookingClick?.();
+                          window.open("https://www.guesty.com/ko-lake-villa", "_blank");
                           handleNavClick();
                         }} 
                         className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
@@ -188,7 +188,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                         className="w-full"
                         onClick={handleNavClick}
                       >
-                        <Link to="/auth">Sign In</Link>
+                        <Link to="/auth">Staff Login</Link>
                       </Button>
                       <Button 
                         onClick={() => {
@@ -253,7 +253,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <Button 
-                  onClick={onBookingClick} 
+                  onClick={() => window.open("https://www.guesty.com/ko-lake-villa", "_blank")} 
                   className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
                 >
                   Book Now
@@ -262,10 +262,10 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
             ) : (
               <div className="flex items-center space-x-2">
                 <Button variant="ghost" asChild>
-                  <Link to="/auth">Sign In</Link>
+                  <Link to="/auth">Staff Login</Link>
                 </Button>
                 <Button 
-                  onClick={onBookingClick} 
+                  onClick={() => window.open("https://www.guesty.com/ko-lake-villa", "_blank")} 
                   className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
                 >
                   Book Now

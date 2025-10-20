@@ -65,7 +65,7 @@ export const Gallery = () => {
   }
 
   return (
-    <section id="gallery" className="py-20">
+    <section id="gallery" className="py-20" data-testid="gallery-section">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Gallery</h2>

@@ -54,7 +54,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
 
   if (isLoading) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5" data-testid="hero">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <Skeleton className="h-16 w-96 mx-auto" />
@@ -72,7 +72,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
 
   if (error) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5" data-testid="hero">
         <div className="container mx-auto px-4">
           <Alert variant="destructive" className="max-w-md mx-auto">
             <AlertCircle className="h-4 w-4" />
@@ -87,7 +87,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
 
   if (!heroContent || heroContent.length === 0) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5" data-testid="hero">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground">
@@ -111,7 +111,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
   const currentContent = heroContent[currentSlide];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" data-testid="hero">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"

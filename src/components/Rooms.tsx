@@ -70,7 +70,7 @@ export const Rooms = ({ onBookingClick }: RoomsProps) => {
 
   if (loading) {
     return (
-      <section id="rooms" className="py-20 bg-muted/30">
+      <section id="rooms" className="py-20 bg-muted/30" data-testid="rooms-section">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Luxury Accommodations</h2>
@@ -82,7 +82,7 @@ export const Rooms = ({ onBookingClick }: RoomsProps) => {
   }
 
   return (
-    <section id="rooms" className="py-20 bg-muted/30">
+    <section id="rooms" className="py-20 bg-muted/30" data-testid="rooms-section">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Luxury Accommodations</h2>
