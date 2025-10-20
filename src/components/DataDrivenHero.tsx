@@ -99,7 +99,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               60 foot lao pool, 350 yards from swim and surf and lake sanband next to garden
             </p>
-            <Button onClick={onBookingClick} size="lg" className="btn-kurumba text-lg px-8 py-3">
+            <Button onClick={onBookingClick} size="lg" className="text-lg px-8 py-3 bg-[#FF9933] hover:bg-[#CC6600] text-white font-semibold rounded-xl shadow-md transition-all">
               Book Now
             </Button>
           </div>
@@ -145,7 +145,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
               <Button
                 onClick={() => handleCTAClick(currentContent.cta_action)}
                 size="lg"
-                className="btn-kurumba text-lg px-8 py-3"
+                className="text-lg px-8 py-3 bg-[#FF9933] hover:bg-[#CC6600] text-white font-semibold rounded-xl shadow-md transition-all"
               >
                 {currentContent.cta_text}
               </Button>

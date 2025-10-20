@@ -175,7 +175,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                           window.open("https://www.guesty.com/ko-lake-villa", "_blank");
                           handleNavClick();
                         }} 
-                        className="w-full btn-kurumba shadow-md"
+                        className="w-full bg-[#FF9933] hover:bg-[#CC6600] text-white font-semibold rounded-xl shadow-md transition-all"
                       >
                         Book Now
                       </Button>
@@ -195,7 +195,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                           onBookingClick?.();
                           handleNavClick();
                         }} 
-                        className="w-full btn-kurumba shadow-md"
+                        className="w-full bg-[#FF9933] hover:bg-[#CC6600] text-white font-semibold rounded-xl shadow-md transition-all"
                       >
                         Book Now
                       </Button>
@@ -254,7 +254,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                 </DropdownMenu>
                 <Button 
                   onClick={() => window.open("https://www.guesty.com/ko-lake-villa", "_blank")} 
-                  className="btn-kurumba shadow-md"
+                  className="bg-[#FF9933] hover:bg-[#CC6600] text-white font-semibold rounded-xl shadow-md transition-all px-6 py-2"
                 >
                   Book Now
                 </Button>
@@ -266,7 +266,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                 </Button>
                 <Button 
                   onClick={() => window.open("https://www.guesty.com/ko-lake-villa", "_blank")} 
-                  className="btn-kurumba shadow-md"
+                  className="bg-[#FF9933] hover:bg-[#CC6600] text-white font-semibold rounded-xl shadow-md transition-all px-6 py-2"
                 >
                   Book Now
                 </Button>
