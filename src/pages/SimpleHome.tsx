@@ -88,7 +88,7 @@ export default function SimpleHome() {
 
       {/* Hero */}
       <section className="hero">
-        <img src="/src/assets/PoolSunset.jpg" alt="Koggala Lake at sunrise" />
+        <img src="/src/assets/PoolSunset.jpg" alt="Ko Lake luxury villa pool at sunset overlooking Koggala Lake, Ahangama Sri Lanka" />
         <div className="copy">
           <div className="container">
             <div style={{ maxWidth: 900 }}>
@@ -130,7 +130,7 @@ export default function SimpleHome() {
         <div className="grid grid-3" style={{ marginTop: 16 }}>
           {ROOMS.map((r) => (
             <article className="room" key={r.key}>
-              <img src={`/src/assets/1 (3).jpg`} alt={r.name} />
+              <img src={`/src/assets/1 (3).jpg`} alt={`${r.name} - Ko Lake luxury accommodation Ahangama`} />
               <div className="pad">
                 <h3>{r.name}</h3>
                 <p className="muted" style={{ marginTop: 6 }}>{r.blurb}</p>
