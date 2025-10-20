@@ -74,9 +74,9 @@ export default function SimpleHome() {
         .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
         .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
         .hero .copy{position:absolute;inset:0;display:flex;align-items:center;z-index:10}
-        .hero h1{color:#fff;font-size:40px;line-height:1.1;margin:0 0 12px}
+        .hero h1{color:#fff;font-size:14px;line-height:1.3;margin:0 0 12px;font-weight:400}
         .hero p{color:#eef2ff;max-width:700px;margin:0 0 18px}
-        @media (min-width: 860px){ .hero h1{font-size:64px} }
+        @media (min-width: 860px){ .hero h1{font-size:21px} }
 
         .strip{background:var(--wash);border-block:1px solid var(--line)}
         .grid{display:grid;gap:16px}
