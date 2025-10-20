@@ -163,8 +163,6 @@ export default function SimpleHome() {
             <strong>Ko Lake • Ahangama</strong>
           </div>
           <nav className="nav" style={{ display: "flex" }}>
-            <a href="#rooms">Rooms</a>
-            <a href="/gallery">Gallery</a>
             <a href="/rooms">Rooms</a>
             <a href="/gallery">Gallery</a>
             <a href="/amenities">Amenities</a>
