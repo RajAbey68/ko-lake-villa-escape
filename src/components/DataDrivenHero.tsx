@@ -99,7 +99,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               60 foot lao pool, 350 yards from swim and surf and lake sanband next to garden
             </p>
-            <Button onClick={onBookingClick} size="lg" className="text-lg px-8 py-3">
+            <Button onClick={onBookingClick} size="lg" className="btn-kurumba text-lg px-8 py-3">
               Book Now
             </Button>
           </div>
@@ -145,7 +145,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
               <Button
                 onClick={() => handleCTAClick(currentContent.cta_action)}
                 size="lg"
-                className="text-lg px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground"
+                className="btn-kurumba text-lg px-8 py-3"
               >
                 {currentContent.cta_text}
               </Button>
@@ -153,7 +153,7 @@ export const DataDrivenHero = ({ onBookingClick }: DataDrivenHeroProps) => {
             <Button
               variant="outline"
               size="lg"
-              className="text-lg px-8 py-3 border-white text-white hover:bg-white hover:text-foreground"
+              className="text-lg px-8 py-3 border-2 border-white bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-stone transition-all"
               onClick={() => document.getElementById('rooms')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Explore Rooms

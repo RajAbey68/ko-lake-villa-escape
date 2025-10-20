@@ -8,77 +8,112 @@
 
 @layer base {
   :root {
-    --background: 38 84% 97%;
-    --foreground: 28 40% 39%;
-    --card: 38 84% 97%;
-    --card-foreground: 28 40% 39%;
-    --popover: 38 84% 97%;
-    --popover-foreground: 28 40% 39%;
-    --primary: 26 100% 65%;
-    --primary-foreground: 38 84% 97%;
-    --secondary: 88 30% 70%;
-    --secondary-foreground: 28 40% 39%;
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 28 40% 39%;
-    --accent: 189 55% 60%;
-    --accent-foreground: 38 84% 97%;
+    /* Sri Lankan Flag & Kurumba (King Coconut) Color Palette */
+    /* Saffron/Orange - Sri Lankan flag & King Coconut */
+    --kurumba-orange: 25 95% 53%;        /* #FF9933 - Vibrant orange */
+    --kurumba-light: 25 100% 85%;        /* Light orange tint */
+    --kurumba-dark: 25 100% 35%;         /* Deep orange */
+    
+    /* Maroon - Sri Lankan flag */
+    --lanka-maroon: 0 65% 35%;           /* #8B2500 - Deep maroon */
+    --lanka-maroon-light: 0 45% 55%;     /* Lighter maroon */
+    
+    /* Green - Sri Lankan flag & tropical nature */
+    --lanka-green: 145 60% 35%;          /* #2D7A4F - Forest green */
+    --lanka-green-light: 145 50% 55%;    /* Lighter green */
+    
+    /* Lake & Ocean blues */
+    --lake-blue: 200 70% 45%;            /* #2596BE - Koggala Lake */
+    --ocean-blue: 195 65% 55%;           /* Lighter ocean */
+    
+    /* Neutrals - Sand & Stone */
+    --sand-cream: 40 35% 92%;            /* #F5F0E8 - Beach sand */
+    --stone-gray: 30 8% 25%;             /* #3D3A36 - Stone */
+    
+    /* shadcn/ui compatible variables */
+    --background: 40 35% 98%;            /* Warm white */
+    --foreground: 30 8% 15%;             /* Dark charcoal */
+    --card: 0 0% 100%;                   /* Pure white */
+    --card-foreground: 30 8% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 8% 15%;
+    --primary: 25 95% 53%;               /* Kurumba orange */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 145 60% 35%;            /* Lanka green */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 40 35% 92%;                 /* Sand cream */
+    --muted-foreground: 30 8% 45%;
+    --accent: 200 70% 45%;               /* Lake blue */
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 88 30% 70%;
-    --input: 28 40% 39%;
-    --ring: 26 100% 65%;
-    --chart-1: 43 89% 70%;
-    --chart-2: 180 65% 45%;
-    --chart-3: 150 60% 45%;
-    --chart-4: 28 85% 65%;
-    --chart-5: 22 85% 55%;
-    --radius: 0.5rem;
-    --sidebar-background: 45 100% 98%;
-    --sidebar-foreground: 25 50% 15%;
-    --sidebar-primary: 35 95% 55%;
-    --sidebar-primary-foreground: 45 100% 98%;
-    --sidebar-accent: 42 88% 75%;
-    --sidebar-accent-foreground: 25 50% 15%;
-    --sidebar-border: 42 50% 85%;
-    --sidebar-ring: 35 95% 55%;
-  }
-  .dark {
-    --background: 28 40% 20%;
-    --foreground: 38 84% 97%;
-    --card: 28 40% 20%;
-    --card-foreground: 38 84% 97%;
-    --popover: 28 40% 20%;
-    --popover-foreground: 38 84% 97%;
-    --primary: 26 100% 55%;
-    --primary-foreground: 38 84% 97%;
-    --secondary: 88 25% 40%;
-    --secondary-foreground: 38 84% 97%;
-    --muted: 28 40% 15%;
-    --muted-foreground: 38 70% 90%;
-    --accent: 189 55% 40%;
-    --accent-foreground: 38 84% 97%;
-    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 28 40% 30%;
-    --input: 28 40% 30%;
-    --ring: 26 100% 55%;
-    --chart-1: 43 89% 70%;
-    --chart-2: 180 65% 45%;
-    --chart-3: 150 60% 45%;
-    --chart-4: 28 85% 65%;
-    --chart-5: 22 85% 55%;
-    --sidebar-background: 25 30% 8%;
-    --sidebar-foreground: 48 85% 95%;
-    --sidebar-primary: 35 95% 65%;
-    --sidebar-primary-foreground: 25 30% 8%;
-    --sidebar-accent: 42 88% 65%;
-    --sidebar-accent-foreground: 25 30% 8%;
-    --sidebar-border: 25 20% 20%;
-    --sidebar-ring: 35 95% 65%;
+    --border: 40 20% 85%;                /* Soft border */
+    --input: 40 20% 85%;
+    --ring: 25 95% 53%;                  /* Kurumba orange */
+    --radius: 0.75rem;                   /* Slightly rounded */
+  }
+  
+  .dark {
+    --background: 30 8% 12%;
+    --foreground: 40 35% 95%;
+    --card: 30 8% 15%;
+    --card-foreground: 40 35% 95%;
+    --popover: 30 8% 15%;
+    --popover-foreground: 40 35% 95%;
+    --primary: 25 95% 58%;
+    --primary-foreground: 30 8% 12%;
+    --secondary: 145 50% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 30 8% 20%;
+    --muted-foreground: 40 20% 70%;
+    --accent: 200 60% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 8% 25%;
+    --input: 30 8% 25%;
+    --ring: 25 95% 58%;
   }
 }
 
 @layer base {
   * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
+  body { 
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  /* Sri Lankan luxury villa components */
+  .villa-card {
+    @apply rounded-2xl border bg-card overflow-hidden transition-all duration-300;
+    @apply hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  .btn-kurumba {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-200;
+    @apply bg-[hsl(var(--kurumba-orange))] text-white;
+    @apply hover:bg-[hsl(var(--kurumba-dark))] hover:shadow-md;
+  }
+  
+  .btn-lanka-green {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-200;
+    @apply bg-[hsl(var(--lanka-green))] text-white;
+    @apply hover:bg-[hsl(var(--lanka-green-light))] hover:shadow-md;
+  }
+  
+  .hero-overlay {
+    @apply absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50;
+  }
+  
+  .section-heading {
+    @apply text-3xl md:text-4xl font-semibold text-foreground;
+    font-family: 'Playfair Display', serif;
+  }
 }

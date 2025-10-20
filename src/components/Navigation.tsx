@@ -175,7 +175,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                           window.open("https://www.guesty.com/ko-lake-villa", "_blank");
                           handleNavClick();
                         }} 
-                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
+                        className="w-full btn-kurumba shadow-md"
                       >
                         Book Now
                       </Button>
@@ -195,7 +195,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                           onBookingClick?.();
                           handleNavClick();
                         }} 
-                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
+                        className="w-full btn-kurumba shadow-md"
                       >
                         Book Now
                       </Button>
@@ -254,7 +254,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                 </DropdownMenu>
                 <Button 
                   onClick={() => window.open("https://www.guesty.com/ko-lake-villa", "_blank")} 
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
+                  className="btn-kurumba shadow-md"
                 >
                   Book Now
                 </Button>
@@ -266,7 +266,7 @@ export const Navigation = ({ onBookingClick }: NavigationProps) => {
                 </Button>
                 <Button 
                   onClick={() => window.open("https://www.guesty.com/ko-lake-villa", "_blank")} 
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
+                  className="btn-kurumba shadow-md"
                 >
                   Book Now
                 </Button>
