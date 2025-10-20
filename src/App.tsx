@@ -15,6 +15,7 @@ import DealsPage from "./pages/DealsPage";
 import AuthPage from "./pages/AuthPage";
 import AdminPage from "./pages/AdminPage";
 import VideoPage from "./pages/VideoPage";
+import BookingPage from "./pages/BookingPage";
 
 const queryClient = new QueryClient();
 
@@ -29,11 +30,14 @@ const App = () => (
             <Route path="/" element={<SimpleHome />} />
             <Route path="/old-home" element={<Index />} />
             <Route path="/legacy-home" element={<SimpleIndex />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/rooms" element={<AccommodationPage />} />
             <Route path="/accommodation" element={<AccommodationPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/amenities" element={<ExperiencesPage />} />
             <Route path="/experiences" element={<ExperiencesPage />} />
             <Route path="/deals" element={<DealsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/book" element={<BookingPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/videos" element={<VideoPage />} />
