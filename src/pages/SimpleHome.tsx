@@ -117,7 +117,18 @@ export default function SimpleHome() {
       <header className="sticky">
         <div className="container" style={{ padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <img src="/ko-lake-logo.png" alt="Ko Lake" style={{ width: 56, height: 56, objectFit: "contain" }} />
+            <div style={{ 
+              width: 56, 
+              height: 56, 
+              borderRadius: "50%", 
+              background: "linear-gradient(135deg, #d26a1b 0%, #e88a3d 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#fff",
+              fontSize: 24,
+              fontWeight: 700
+            }}>KL</div>
             <strong>Ko Lake • Ahangama</strong>
           </div>
           <nav className="nav" style={{ display: "flex" }}>
