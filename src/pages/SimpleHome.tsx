@@ -71,7 +71,7 @@ export default function SimpleHome() {
       <header className="sticky">
         <div className="container" style={{ padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <img src="/ko-lake-logo.png" alt="Ko Lake" style={{ width: 48, height: 48, borderRadius: 999 }} />
+            <img src="/ko-lake-logo.png" alt="Ko Lake" style={{ width: 56, height: 56, objectFit: "contain" }} />
             <strong>Ko Lake • Ahangama</strong>
           </div>
           <nav className="nav" style={{ display: "flex" }}>
@@ -92,8 +92,8 @@ export default function SimpleHome() {
         <div className="copy">
           <div className="container">
             <div style={{ maxWidth: 900 }}>
-              <h1>Lakeside villa for families, surfers & friends</h1>
-              <p>7 rooms • Chef on request • Fast Wi-Fi • Near Kabalana & Midigama breaks • Roof-garden sunsets</p>
+              <h1>Lakeside Holiday Rental for Surfers, Digital Nomads & Families</h1>
+              <p>7 rooms • Unlimited WiFi • Private chef • Lake access • Near surf spots & wildlife safaris • Pet friendly</p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                 <a href="#book" className="btn btn-primary">Check Availability</a>
                 <a href="#rooms" className="btn btn-ghost">Browse Rooms</a>
@@ -105,17 +105,19 @@ export default function SimpleHome() {
 
       {/* Availability */}
       <section id="book" className="strip">
-        <div className="container" style={{ padding: "18px 16px" }}>
-          <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
+        <div className="container" style={{ padding: "24px 16px" }}>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", justifyContent: "center" }}>
             <input className="field" type="date" aria-label="Check-in" style={{ flex: "0 0 auto", width: "180px" }} />
             <input className="field" type="date" aria-label="Check-out" style={{ flex: "0 0 auto", width: "180px" }} />
             <select className="field" aria-label="Guests" style={{ flex: "0 0 auto", width: "140px" }}>
               <option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5+</option>
             </select>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <a href="#contact" className="btn btn-primary" style={{ whiteSpace: "nowrap" }}>WhatsApp for best rates</a>
-              <span className="muted" style={{ fontSize: 12 }}>Direct bookings are 5–12% lower than OTAs. WhatsApp us for date flexibility.</span>
-            </div>
+            <a href="#contact" className="btn btn-primary" style={{ whiteSpace: "nowrap", flex: "0 0 auto" }}>WhatsApp for best rates</a>
+          </div>
+          <div style={{ marginTop: 20, textAlign: "center" }}>
+            <p style={{ fontSize: 18, color: "var(--ink)", margin: 0, fontWeight: 500 }}>
+              Direct bookings are 5–12% lower than OTAs. WhatsApp us for date flexibility.
+            </p>
           </div>
         </div>
       </section>
@@ -172,13 +174,17 @@ export default function SimpleHome() {
         <h2 style={{ fontSize: 28, marginTop: 0 }}>Amenities</h2>
         <div className="grid grid-3" style={{ marginTop: 16 }}>
           {[
-            "Chef on request (Sri Lankan / Indian / Western)",
-            "Fast Wi-Fi & work nooks",
-            "Pool deck + roof garden sunsets",
-            "Surf breaks: Kabalana, Midigama, Ahangama",
-            "Boat safaris on Koggala Lake",
-            "Airport transfers & tuk-tuks",
-            "Laundry, bicycles, projector/TV"
+            "Private chef on request (Sri Lankan / Indian / Western)",
+            "Unlimited WiFi perfect for digital nomads",
+            "Lap pool with lake views & roof garden",
+            "Near surf spots: Kabalana, Midigama, Ahangama",
+            "Lake safari tours & wildlife viewing",
+            "Fishing & birdwatching on Koggala Lake",
+            "Near tea plantations & hiking trails",
+            "Pet friendly & senior friendly accommodation",
+            "Event venue for weddings & groups",
+            "Off-street parking & BBQ facilities",
+            "Airport transfers & tuk-tuk hire"
           ].map((t, i) => (
             <div key={i} className="card" style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
               <span style={{ width: 10, height: 10, borderRadius: 999, background: "var(--brand)", marginTop: 6 }} />
