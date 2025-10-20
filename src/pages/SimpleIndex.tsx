@@ -11,7 +11,7 @@ const SimpleIndex = () => {
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-playfair font-bold text-tropical-700">Ko Lake Villa</h1>
+            <h1 className="text-2xl font-playfair font-bold text-tropical-700">Ko Lake</h1>
             <div className="flex gap-6">
               <a href="#rooms" className="hover:text-tropical-600">Rooms</a>
               <a href="#gallery" className="hover:text-tropical-600">Gallery</a>
@@ -32,7 +32,7 @@ const SimpleIndex = () => {
       >
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 w-full max-w-5xl mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-4">Ko Lake Villa</h1>
+          <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-4">Ko Lake</h1>
           <p className="text-xl md:text-2xl mb-2">Luxury Lakefront Accommodation in Sri Lanka</p>
           <p className="text-lg md:text-xl mb-6 font-light italic">Relax, Revive, Connect</p>
           <div className="flex items-center justify-center gap-6 mb-8 text-base md:text-lg">
@@ -167,7 +167,7 @@ const SimpleIndex = () => {
       <section className="py-20 bg-tropical-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-playfair font-bold mb-4">Ready to Experience Paradise?</h2>
-          <p className="text-xl mb-8">Book your stay at Ko Lake Villa today</p>
+          <p className="text-xl mb-8">Book your stay at Ko Lake today</p>
           <button className="bg-white text-tropical-600 px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition">
             Check Availability
           </button>
@@ -177,9 +177,9 @@ const SimpleIndex = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-2xl font-playfair font-bold mb-4">Ko Lake Villa</h3>
+          <h3 className="text-2xl font-playfair font-bold mb-4">Ko Lake</h3>
           <p className="text-gray-400 mb-4">Ahangama, Sri Lanka</p>
-          <p className="text-gray-400">© 2025 Ko Lake Villa. All rights reserved.</p>
+          <p className="text-gray-400">© 2025 Ko Lake. All rights reserved.</p>
         </div>
       </footer>
     </div>
