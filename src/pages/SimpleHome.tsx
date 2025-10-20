@@ -136,7 +136,7 @@ export default function SimpleHome() {
         <div className="container" style={{ padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <img 
-              src="/ko-lake-logo.png" 
+              src="/ko-lake-logo.jpg" 
               alt="Ko Lake" 
               style={{ width: 56, height: 56, objectFit: "contain" }}
               onError={(e) => {
