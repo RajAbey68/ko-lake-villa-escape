@@ -17,7 +17,8 @@ import { AdminContactSubmissions } from '@/components/admin/AdminContactSubmissi
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { AdminGuestyTest } from '@/components/admin/AdminGuestyTest';
 import { AdminAIAssistant } from '@/components/admin/AdminAIAssistant';
-import { Shield, Users, Bed, Star, Image, MessageSquare, MapPin, BarChart, Settings, Sparkles } from 'lucide-react';
+import { AdminShadowPages } from '@/components/admin/AdminShadowPages';
+import { Shield, Users, Bed, Star, Image, MessageSquare, MapPin, BarChart, Settings, Sparkles, FileEdit } from 'lucide-react';
 
 const AdminPage = () => {
   // TESTING MODE: Complete bypass - no auth checks at all
@@ -74,7 +75,7 @@ const AdminPage = () => {
         </Card>
 
         <Tabs defaultValue="gallery" className="space-y-4">
-          <TabsList className="grid grid-cols-4 lg:grid-cols-10 w-full">
+          <TabsList className="grid grid-cols-4 lg:grid-cols-11 w-full">
             <TabsTrigger value="setup" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
               <span className="hidden sm:inline">Setup</span>
@@ -118,6 +119,10 @@ const AdminPage = () => {
             <TabsTrigger value="ai" className="flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">AI Test</span>
+            </TabsTrigger>
+            <TabsTrigger value="shadow" className="flex items-center gap-2">
+              <FileEdit className="h-4 w-4" />
+              <span className="hidden sm:inline">Shadow CMS</span>
             </TabsTrigger>
           </TabsList>
 
@@ -175,6 +180,10 @@ const AdminPage = () => {
 
           <TabsContent value="ai">
             <AdminAIAssistant />
+          </TabsContent>
+
+          <TabsContent value="shadow">
+            <AdminShadowPages />
           </TabsContent>
         </Tabs>
       </div>
