@@ -1,6 +1,6 @@
 // Simple 7-Room STR site for React + Vite (self-contained CSS)
 // Flow: Hero → Availability → Rooms (7) → Gallery → Amenities → Map → Reviews → Contact
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 
 const ROOMS = [
   { key: "family-suite", name: "Family Suite (Pool & Stream)", pax: 4, size: "38 m²", blurb: "Family suite by the pool & stream; French doors; lounge.", price: 120 },
@@ -25,7 +25,25 @@ export default function SimpleHome() {
     toddlers: 0
   });
   
+  const guestPickerRef = useRef<HTMLDivElement>(null);
   const totalGuests = guests.adults + guests.children + guests.toddlers;
+  
+  // Close guest picker when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (guestPickerRef.current && !guestPickerRef.current.contains(event.target as Node)) {
+        setShowGuestPicker(false);
+      }
+    };
+    
+    if (showGuestPicker) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showGuestPicker]);
   
   const handleCheckInChange = (date: string) => {
     setCheckIn(date);
@@ -183,7 +201,7 @@ export default function SimpleHome() {
               disabled={!checkIn}
               style={{ flex: "0 0 auto", width: "180px", opacity: checkIn ? 1 : 0.5 }} 
             />
-            <div className="guest-picker" style={{ flex: "0 0 auto", width: "200px", position: "relative" }}>
+            <div className="guest-picker" ref={guestPickerRef} style={{ flex: "0 0 auto", width: "200px", position: "relative" }}>
               <button 
                 className="field" 
                 onClick={() => setShowGuestPicker(!showGuestPicker)}
