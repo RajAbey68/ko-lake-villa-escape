@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
 import SimpleIndex from "./pages/SimpleIndex";
+import SimpleHome from "./pages/SimpleHome";
 import NotFound from "./pages/NotFound";
 import GalleryPage from "./pages/GalleryPage";
 import ContactPage from "./pages/ContactPage";
@@ -25,7 +26,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<SimpleHome />} />
+            <Route path="/old-home" element={<Index />} />
             <Route path="/legacy-home" element={<SimpleIndex />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/contact" element={<ContactPage />} />
