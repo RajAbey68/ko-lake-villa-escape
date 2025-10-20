@@ -16,7 +16,8 @@ import { AdminLocationInfo } from '@/components/admin/AdminLocationInfo';
 import { AdminContactSubmissions } from '@/components/admin/AdminContactSubmissions';
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { AdminGuestyTest } from '@/components/admin/AdminGuestyTest';
-import { Shield, Users, Bed, Star, Image, MessageSquare, MapPin, BarChart, Settings } from 'lucide-react';
+import { AdminAIAssistant } from '@/components/admin/AdminAIAssistant';
+import { Shield, Users, Bed, Star, Image, MessageSquare, MapPin, BarChart, Settings, Sparkles } from 'lucide-react';
 
 const AdminPage = () => {
   const { user, loading, isAdmin } = useAuth();
@@ -61,7 +62,7 @@ const AdminPage = () => {
         </Card>
 
         <Tabs defaultValue="setup" className="space-y-4">
-          <TabsList className="grid grid-cols-4 lg:grid-cols-9 w-full">
+          <TabsList className="grid grid-cols-4 lg:grid-cols-10 w-full">
             <TabsTrigger value="setup" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
               <span className="hidden sm:inline">Setup</span>
@@ -101,6 +102,10 @@ const AdminPage = () => {
             <TabsTrigger value="guesty" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
               <span className="hidden sm:inline">Guesty</span>
+            </TabsTrigger>
+            <TabsTrigger value="ai" className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4" />
+              <span className="hidden sm:inline">AI Test</span>
             </TabsTrigger>
           </TabsList>
 
@@ -154,6 +159,10 @@ const AdminPage = () => {
 
           <TabsContent value="guesty">
             <AdminGuestyTest />
+          </TabsContent>
+
+          <TabsContent value="ai">
+            <AdminAIAssistant />
           </TabsContent>
         </Tabs>
       </div>

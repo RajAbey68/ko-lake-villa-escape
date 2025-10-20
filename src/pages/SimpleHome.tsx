@@ -1,6 +1,6 @@
 // Simple 7-Room STR site for React + Vite (self-contained CSS)
 // Flow: Hero → Availability → Rooms (7) → Gallery → Amenities → Map → Reviews → Contact
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const ROOMS = [
   { key: "family-suite", name: "Family Suite (Pool & Stream)", pax: 4, size: "38 m²", blurb: "Family suite by the pool & stream; French doors; lounge.", price: 120 },
@@ -14,6 +14,42 @@ const ROOMS = [
 
 export default function SimpleHome() {
   const year = useMemo(() => new Date().getFullYear(), []);
+  const today = useMemo(() => new Date().toISOString().split('T')[0], []);
+  
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [showGuestPicker, setShowGuestPicker] = useState(false);
+  const [guests, setGuests] = useState({
+    adults: 2,
+    children: 0,
+    toddlers: 0
+  });
+  
+  const totalGuests = guests.adults + guests.children + guests.toddlers;
+  
+  const handleCheckInChange = (date: string) => {
+    setCheckIn(date);
+    // If checkout is before or same as new checkin, clear it
+    if (checkOut && checkOut <= date) {
+      setCheckOut('');
+    }
+  };
+  
+  const updateGuests = (type: 'adults' | 'children' | 'toddlers', increment: boolean) => {
+    setGuests(prev => {
+      const newValue = increment ? prev[type] + 1 : Math.max(0, prev[type] - 1);
+      
+      // Enforce limits
+      if (type === 'adults' && newValue > 24) return prev;
+      if (type === 'children' && newValue > 4) return prev;
+      if (type === 'toddlers' && newValue > 2) return prev;
+      
+      // At least 1 adult required
+      if (type === 'adults' && newValue < 1) return prev;
+      
+      return { ...prev, [type]: newValue };
+    });
+  };
 
   return (
     <>
@@ -64,6 +100,16 @@ export default function SimpleHome() {
 
         .card{border:1px solid var(--line);border-radius:16px;background:#fff;padding:16px}
 
+        .guest-picker{position:relative}
+        .guest-dropdown{position:absolute;top:100%;left:0;right:0;margin-top:4px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);z-index:10}
+        .guest-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+        .guest-row:last-child{border-bottom:none}
+        .guest-controls{display:flex;gap:12px;align-items:center}
+        .guest-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600}
+        .guest-btn:hover{background:var(--wash)}
+        .guest-btn:disabled{opacity:0.3;cursor:not-allowed}
+        .guest-count{min-width:30px;text-align:center;font-weight:600}
+
         footer{border-top:1px solid var(--line);color:var(--muted);text-align:center;padding:20px}
       `}</style>
 
@@ -80,7 +126,7 @@ export default function SimpleHome() {
             <a href="#amenities">Amenities</a>
             <a href="#map">Location</a>
             <a href="#contact">Contact</a>
-            <a href="/admin" style={{ fontSize: 14, opacity: 0.7 }}>Sign In</a>
+            <a href="/admin" style={{ fontSize: 14, opacity: 0.7, fontWeight: 600 }}>Staff</a>
             <a className="btn btn-primary" href="#book">Book Now</a>
           </nav>
         </div>
@@ -107,11 +153,75 @@ export default function SimpleHome() {
       <section id="book" className="strip">
         <div className="container" style={{ padding: "24px 16px" }}>
           <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", justifyContent: "center" }}>
-            <input className="field" type="date" aria-label="Check-in" style={{ flex: "0 0 auto", width: "180px" }} />
-            <input className="field" type="date" aria-label="Check-out" style={{ flex: "0 0 auto", width: "180px" }} />
-            <select className="field" aria-label="Guests" style={{ flex: "0 0 auto", width: "140px" }}>
-              <option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5+</option>
-            </select>
+            <input 
+              className="field" 
+              type="date" 
+              aria-label="Check-in"
+              value={checkIn}
+              min={today}
+              onChange={(e) => handleCheckInChange(e.target.value)}
+              style={{ flex: "0 0 auto", width: "180px" }} 
+            />
+            <input 
+              className="field" 
+              type="date" 
+              aria-label="Check-out"
+              value={checkOut}
+              min={checkIn || today}
+              onChange={(e) => setCheckOut(e.target.value)}
+              disabled={!checkIn}
+              style={{ flex: "0 0 auto", width: "180px", opacity: checkIn ? 1 : 0.5 }} 
+            />
+            <div className="guest-picker" style={{ flex: "0 0 auto", width: "200px", position: "relative" }}>
+              <button 
+                className="field" 
+                onClick={() => setShowGuestPicker(!showGuestPicker)}
+                style={{ width: "100%", textAlign: "left", cursor: "pointer", background: "#fff" }}
+                type="button"
+              >
+                {totalGuests} Guest{totalGuests !== 1 ? 's' : ''} ▾
+              </button>
+              {showGuestPicker && (
+                <div className="guest-dropdown">
+                  <div className="guest-row">
+                    <div>
+                      <div style={{ fontWeight: 600 }}>Adults</div>
+                      <div style={{ fontSize: 12, color: "var(--muted)" }}>Age 14+</div>
+                    </div>
+                    <div className="guest-controls">
+                      <button className="guest-btn" onClick={() => updateGuests('adults', false)} disabled={guests.adults <= 1} type="button">−</button>
+                      <span className="guest-count">{guests.adults}</span>
+                      <button className="guest-btn" onClick={() => updateGuests('adults', true)} disabled={guests.adults >= 24} type="button">+</button>
+                    </div>
+                  </div>
+                  <div className="guest-row">
+                    <div>
+                      <div style={{ fontWeight: 600 }}>Children</div>
+                      <div style={{ fontSize: 12, color: "var(--muted)" }}>Age 3-13</div>
+                    </div>
+                    <div className="guest-controls">
+                      <button className="guest-btn" onClick={() => updateGuests('children', false)} disabled={guests.children <= 0} type="button">−</button>
+                      <span className="guest-count">{guests.children}</span>
+                      <button className="guest-btn" onClick={() => updateGuests('children', true)} disabled={guests.children >= 4} type="button">+</button>
+                    </div>
+                  </div>
+                  <div className="guest-row">
+                    <div>
+                      <div style={{ fontWeight: 600 }}>Toddlers</div>
+                      <div style={{ fontSize: 12, color: "var(--muted)" }}>Under 3</div>
+                    </div>
+                    <div className="guest-controls">
+                      <button className="guest-btn" onClick={() => updateGuests('toddlers', false)} disabled={guests.toddlers <= 0} type="button">−</button>
+                      <span className="guest-count">{guests.toddlers}</span>
+                      <button className="guest-btn" onClick={() => updateGuests('toddlers', true)} disabled={guests.toddlers >= 2} type="button">+</button>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid var(--line)", fontSize: 12, color: "var(--muted)" }}>
+                    Max: 24 adults, 4 children, 2 toddlers
+                  </div>
+                </div>
+              )}
+            </div>
             <a href="#contact" className="btn btn-primary" style={{ whiteSpace: "nowrap", flex: "0 0 auto" }}>WhatsApp for best rates</a>
           </div>
           <div style={{ marginTop: 20, textAlign: "center" }}>
