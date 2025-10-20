@@ -165,12 +165,13 @@ export default function SimpleHome() {
           <nav className="nav" style={{ display: "flex" }}>
             <a href="#rooms">Rooms</a>
             <a href="/gallery">Gallery</a>
-            <a href="#amenities">Amenities</a>
+            <a href="/rooms">Rooms</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/amenities">Amenities</a>
             <a href="/deals">Deals</a>
-            <a href="#map">Location</a>
-            <a href="#contact">Contact</a>
+            <a href="/contact">Contact</a>
             <a href="/admin" style={{ fontSize: 14, opacity: 0.7, fontWeight: 600 }}>Staff</a>
-            <a className="btn btn-primary" href="#book">Book Now</a>
+            <a className="btn btn-primary" href="/book">Book Now</a>
           </nav>
         </div>
       </header>
