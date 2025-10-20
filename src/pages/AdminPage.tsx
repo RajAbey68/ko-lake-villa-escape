@@ -23,15 +23,19 @@ const AdminPage = () => {
   const { user, loading, isAdmin } = useAuth();
   const navigate = useNavigate();
   const isE2E = (import.meta as any).env?.VITE_E2E === 'true';
+  
+  // TESTING MODE: Bypass authentication completely
+  const BYPASS_AUTH = true;
 
   useEffect(() => {
-    // Allow admin access during E2E tests without login
-    if (!isE2E && !loading && (!user || !isAdmin)) {
+    // Allow admin access during E2E tests or when BYPASS_AUTH is enabled
+    if (!BYPASS_AUTH && !isE2E && !loading && (!user || !isAdmin)) {
       navigate('/auth');
     }
   }, [user, loading, isAdmin, navigate, isE2E]);
 
-  if (loading) {
+  // Skip loading screen when bypassing auth
+  if (!BYPASS_AUTH && loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
@@ -39,7 +43,8 @@ const AdminPage = () => {
     );
   }
 
-  if (!isE2E && (!user || !isAdmin)) {
+  // Skip auth check when bypassing
+  if (!BYPASS_AUTH && !isE2E && (!user || !isAdmin)) {
     return null;
   }
 
@@ -58,10 +63,15 @@ const AdminPage = () => {
             <p className="text-muted-foreground">
               Welcome to the admin panel. Manage your resort's content, bookings, and settings.
             </p>
+            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-sm text-yellow-800">
+                🔓 <strong>Testing Mode:</strong> Authentication bypassed. Direct access enabled.
+              </p>
+            </div>
           </CardContent>
         </Card>
 
-        <Tabs defaultValue="setup" className="space-y-4">
+        <Tabs defaultValue="gallery" className="space-y-4">
           <TabsList className="grid grid-cols-4 lg:grid-cols-10 w-full">
             <TabsTrigger value="setup" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
