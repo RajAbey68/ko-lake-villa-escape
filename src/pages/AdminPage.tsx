@@ -20,19 +20,21 @@ import { AdminAIAssistant } from '@/components/admin/AdminAIAssistant';
 import { Shield, Users, Bed, Star, Image, MessageSquare, MapPin, BarChart, Settings, Sparkles } from 'lucide-react';
 
 const AdminPage = () => {
-  const { user, loading, isAdmin } = useAuth();
+  // TESTING MODE: Complete bypass - no auth checks at all
+  const BYPASS_AUTH = true;
+  
+  // Only use auth hooks if not bypassing
+  const authResult = BYPASS_AUTH ? { user: null, loading: false, isAdmin: false } : useAuth();
+  const { user, loading, isAdmin } = authResult;
   const navigate = useNavigate();
   const isE2E = (import.meta as any).env?.VITE_E2E === 'true';
-  
-  // TESTING MODE: Bypass authentication completely
-  const BYPASS_AUTH = true;
 
   useEffect(() => {
-    // Allow admin access during E2E tests or when BYPASS_AUTH is enabled
+    // Only redirect if NOT bypassing auth
     if (!BYPASS_AUTH && !isE2E && !loading && (!user || !isAdmin)) {
       navigate('/auth');
     }
-  }, [user, loading, isAdmin, navigate, isE2E]);
+  }, [user, loading, isAdmin, navigate, isE2E, BYPASS_AUTH]);
 
   // Skip loading screen when bypassing auth
   if (!BYPASS_AUTH && loading) {
