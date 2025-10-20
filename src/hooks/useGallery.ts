@@ -46,8 +46,13 @@ export const useGallery = () => {
         .order('display_order', { ascending: true })
         .order('created_at', { ascending: false });
       
-      if (error) throw error;
-      return data as GalleryItem[];
+      if (error) {
+        console.error('Gallery fetch error:', error);
+        throw error;
+      }
+      
+      console.log('Gallery items fetched:', data?.length || 0);
+      return (data as GalleryItem[]) || [];
     },
   });
 };

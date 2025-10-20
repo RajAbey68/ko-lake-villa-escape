@@ -52,12 +52,19 @@ export const Gallery = () => {
   }
 
   if (error) {
+    console.error('Gallery error:', error);
     return (
       <section id="gallery" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Gallery</h2>
             <p className="text-xl text-destructive">Error loading gallery. Please try again later.</p>
+            <p className="text-sm text-muted-foreground mt-2">
+              {error instanceof Error ? error.message : 'Unknown error'}
+            </p>
+            <div className="mt-4">
+              <Button onClick={() => window.location.reload()}>Reload Page</Button>
+            </div>
           </div>
         </div>
       </section>
