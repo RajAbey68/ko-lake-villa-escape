@@ -8,44 +8,35 @@ interface KoLakeLogoProps {
 export const KoLakeLogo = ({ className = "", variant = "primary" }: KoLakeLogoProps) => {
   const [imageError, setImageError] = useState(false);
   
-  const logoSrc = variant === "primary" 
-    ? "/lovable-uploads/930e693f-f8b5-499d-993f-a06e346a3516.png"
-    : "/lovable-uploads/6cdff8d6-80c3-40b9-b87d-ad1daf65fd6d.png";
-  
-  const fallbackSrc = variant === "primary"
-    ? "/lovable-uploads/6cdff8d6-80c3-40b9-b87d-ad1daf65fd6d.png"
-    : "/lovable-uploads/930e693f-f8b5-499d-993f-a06e346a3516.png";
+  // Use the fisherman logo
+  const logoSrc = "/ko-lake-logo.jpg";
 
   if (imageError) {
     return (
       <div className={`flex items-center space-x-2 ${className}`}>
-        <div className="w-10 h-10 bg-gradient-to-br from-tropical-emerald to-tropical-teal rounded-full flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full" style={{ 
+          background: "linear-gradient(135deg, #d26a1b 0%, #e88a3d 100%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
           <span className="text-white font-bold text-xl">KL</span>
         </div>
-        <span className="font-playfair text-xl font-semibold text-foreground">Ko Lake Villa</span>
+        <span className="font-playfair text-xl font-semibold text-foreground">Ko Lake • Ahangama</span>
       </div>
     );
   }
 
   return (
-    <img
-      src={logoSrc}
-      alt="Ko Lake Villa - Traditional Sri Lankan Pavilion Logo"
-      className={`h-12 w-auto object-contain ${className}`}
-      onError={() => {
-        // Try fallback image first
-        const img = new Image();
-        img.onload = () => {
-          // If fallback loads, update src
-          setImageError(false);
-        };
-        img.onerror = () => {
-          // If fallback also fails, show text logo
-          setImageError(true);
-        };
-        img.src = fallbackSrc;
-      }}
-      loading="lazy"
-    />
+    <div className={`flex items-center space-x-2 ${className}`}>
+      <img
+        src={logoSrc}
+        alt="Ko Lake - Fisherman Logo"
+        className="h-12 w-12 object-contain"
+        onError={() => setImageError(true)}
+        loading="lazy"
+      />
+      <span className="font-playfair text-xl font-semibold text-foreground">Ko Lake • Ahangama</span>
+    </div>
   );
 };
