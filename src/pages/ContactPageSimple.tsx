@@ -140,15 +140,6 @@ export default function ContactPageSimple() {
               <a href="https://wa.me/94711730345?text=Hi! I'd like to book Ko Lake Villa" className="btn btn-primary" style={{width:"100%",fontSize:18,padding:"16px"}}>
                 💬 WhatsApp Us Now
               </a>
-              <div style={{marginTop:24,padding:20,background:"#fffbeb",borderRadius:12,border:"1px solid #fbbf24"}}>
-                <div style={{fontWeight:600,marginBottom:8}}>💰 Direct Booking Benefits:</div>
-                <ul style={{margin:0,paddingLeft:20,fontSize:14}}>
-                  <li>5-12% lower than OTAs</li>
-                  <li>Flexible check-in/out times</li>
-                  <li>Free airport pickup (3+ nights)</li>
-                  <li>Complimentary welcome drinks</li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
