@@ -94,7 +94,7 @@ export const AdminGalleryAI = () => {
   const uploadFile = async (upload: PendingUpload, index: number): Promise<string> => {
     const fileExt = upload.file.name.split('.').pop();
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-    const filePath = `gallery/${fileName}`;
+    const filePath = fileName;
 
     setPendingUploads(prev => {
       const updated = [...prev];
@@ -145,7 +145,7 @@ export const AdminGalleryAI = () => {
 Image URL: ${url}
 
 Return as JSON with keys: title, description, altText, category, keywords (array)`,
-          context: 'seo'
+          context: 'general'
         }
       });
 
@@ -225,14 +225,20 @@ Return as JSON with keys: title, description, altText, category, keywords (array
         const url = await uploadFile(upload, i);
         await analyzeWithAI(url, i);
       } catch (error: any) {
+        console.error('Upload/AI error:', error);
         setPendingUploads(prev => {
           const updated = [...prev];
           updated[i] = {
             ...updated[i],
             status: 'error',
-            error: error.message
+            error: error.message || 'Processing failed'
           };
           return updated;
+        });
+        toast({
+          title: `Error: ${upload.file.name}`,
+          description: error.message || 'Upload or AI analysis failed',
+          variant: 'destructive'
         });
       }
     }
