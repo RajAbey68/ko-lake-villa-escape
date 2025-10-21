@@ -2,8 +2,10 @@
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { supabase } from "@/integrations/supabase/client";
+import { useContacts } from "@/hooks/useContacts";
 
 export default function ContactPageSimple() {
+  const { data: contacts, isLoading: contactsLoading } = useContacts();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -151,96 +153,71 @@ export default function ContactPageSimple() {
           </div>
         </div>
 
-        {/* WhatsApp Contact Cards */}
+        {/* WhatsApp Contact Cards - Data Driven */}
         <div style={{marginTop:64}}>
           <h2 style={{fontSize:28,margin:"0 0 24px",textAlign:"center"}}>Direct Contact</h2>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
-            
-            {/* Manager WhatsApp */}
-            <div className="contact-card">
-              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
-                <div style={{width:48,height:48,borderRadius:12,background:"#dcfce7",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <span style={{fontSize:24}}>📱</span>
-                </div>
-                <div style={{fontWeight:600,fontSize:18}}>Manager WhatsApp</div>
-              </div>
-              <div style={{marginBottom:12}}>
-                <a href="https://wa.me/94711730345" style={{color:"var(--brand)",fontSize:16,fontWeight:600}}>+94 71 173 0345</a>
-                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>Available 24/7</div>
-              </div>
-              <a 
-                href="https://wa.me/94711730345?text=Hi! I'd like to inquire about Ko Lake Villa" 
-                className="btn" 
-                style={{width:"100%",background:"#25D366",color:"white",border:"none"}}
-              >
-                💬 WhatsApp Manager
-              </a>
+          {contactsLoading ? (
+            <div style={{textAlign:"center",padding:40,color:"var(--muted)"}}>Loading contacts...</div>
+          ) : (
+            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
+              {contacts?.map((contact) => {
+                const bgColor = contact.role === 'manager' ? '#dcfce7' : 
+                               contact.role === 'team_leader' ? '#dbeafe' : 
+                               contact.role === 'owner' ? '#fef3c7' : '#f3f4f6';
+                const whatsappNumber = contact.whatsapp?.replace(/[^0-9]/g, '') || contact.phone.replace(/[^0-9]/g, '');
+                const hasWhatsApp = contact.whatsapp || contact.role === 'manager' || contact.role === 'owner';
+                
+                return (
+                  <div key={contact.id} className="contact-card">
+                    <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+                      <div style={{width:48,height:48,borderRadius:12,background:bgColor,display:"flex",alignItems:"center",justifyContent:"center"}}>
+                        <span style={{fontSize:24}}>{contact.icon || '📞'}</span>
+                      </div>
+                      <div style={{fontWeight:600,fontSize:18}}>{contact.title}</div>
+                    </div>
+                    <div style={{marginBottom:12}}>
+                      <a 
+                        href={hasWhatsApp ? `https://wa.me/${whatsappNumber}` : `tel:${contact.phone}`}
+                        style={{color:"var(--brand)",fontSize:16,fontWeight:600}}
+                      >
+                        {contact.phone}
+                      </a>
+                      <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>
+                        {contact.description}
+                      </div>
+                      {contact.languages && contact.languages.length > 0 && (
+                        <div style={{fontSize:12,color:"var(--muted)",marginTop:4}}>
+                          🗣️ {contact.languages.join(', ')}
+                        </div>
+                      )}
+                      {contact.location && (
+                        <div style={{fontSize:12,color:"var(--muted)",marginTop:2}}>
+                          📍 {contact.location}
+                        </div>
+                      )}
+                    </div>
+                    {hasWhatsApp ? (
+                      <a 
+                        href={`https://wa.me/${whatsappNumber}?text=Hi! I'd like to inquire about Ko Lake Villa`}
+                        className="btn" 
+                        style={{width:"100%",background:"#25D366",color:"white",border:"none"}}
+                      >
+                        💬 WhatsApp {contact.name || contact.title}
+                      </a>
+                    ) : (
+                      <a 
+                        href={`tel:${contact.phone}`}
+                        className="btn btn-primary" 
+                        style={{width:"100%"}}
+                      >
+                        📞 Call {contact.name || contact.title}
+                      </a>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-
-            {/* Villa Team Leader */}
-            <div className="contact-card">
-              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
-                <div style={{width:48,height:48,borderRadius:12,background:"#dbeafe",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <span style={{fontSize:24}}>👨‍💼</span>
-                </div>
-                <div style={{fontWeight:600,fontSize:18}}>Villa Team Leader</div>
-              </div>
-              <div style={{marginBottom:12}}>
-                <div style={{color:"var(--ink)",fontSize:16,fontWeight:600}}>+94 71 173 0345</div>
-                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>On-site assistance</div>
-              </div>
-              <a 
-                href="tel:+94711730345" 
-                className="btn btn-primary" 
-                style={{width:"100%"}}
-              >
-                📞 Call Team Leader
-              </a>
-            </div>
-
-            {/* Owner Contact */}
-            <div className="contact-card">
-              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
-                <div style={{width:48,height:48,borderRadius:12,background:"#fef3c7",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <span style={{fontSize:24}}>👤</span>
-                </div>
-                <div style={{fontWeight:600,fontSize:18}}>Owner Contact</div>
-              </div>
-              <div style={{marginBottom:12}}>
-                <div style={{color:"var(--ink)",fontSize:16,fontWeight:600}}>+94 71 173 0345</div>
-                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>Direct line</div>
-              </div>
-              <a 
-                href="https://wa.me/94711730345?text=Hello, I'd like to speak with the owner about Ko Lake Villa" 
-                className="btn" 
-                style={{width:"100%",background:"#25D366",color:"white",border:"none"}}
-              >
-                💬 WhatsApp Owner
-              </a>
-            </div>
-
-            {/* WhatsApp Group */}
-            <div className="contact-card">
-              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
-                <div style={{width:48,height:48,borderRadius:12,background:"#dcfce7",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <span style={{fontSize:24}}>👥</span>
-                </div>
-                <div style={{fontWeight:600,fontSize:18}}>WhatsApp Group</div>
-              </div>
-              <div style={{marginBottom:12}}>
-                <div style={{fontSize:14,color:"var(--muted)"}}>Join our guest group</div>
-                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>Instant support & updates</div>
-              </div>
-              <button 
-                className="btn" 
-                style={{width:"100%",background:"#25D366",color:"white",border:"none"}}
-                disabled
-              >
-                💬 Join Group (Coming Soon)
-              </button>
-            </div>
-
-          </div>
+          )}
         </div>
 
         <div style={{marginTop:64}}>
@@ -252,6 +229,44 @@ export default function ContactPageSimple() {
               style={{width:"100%",height:400,border:0}}
               loading="lazy"
             />
+          </div>
+        </div>
+
+        {/* Travel Times */}
+        <div style={{marginTop:64}}>
+          <h2 style={{fontSize:28,margin:"0 0 24px",textAlign:"center"}}>Travel Times to Ko Lake</h2>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:20,maxWidth:1000,margin:"0 auto"}}>
+            
+            <div className="contact-card" style={{textAlign:"center"}}>
+              <div style={{fontSize:40,marginBottom:12}}>✈️</div>
+              <div style={{fontWeight:600,fontSize:18,marginBottom:8}}>Colombo Airport</div>
+              <div style={{fontSize:24,fontWeight:700,color:"var(--brand)"}}>2:30 hours</div>
+            </div>
+
+            <div className="contact-card" style={{textAlign:"center"}}>
+              <div style={{fontSize:40,marginBottom:12}}>🏙️</div>
+              <div style={{fontWeight:600,fontSize:18,marginBottom:8}}>Colombo</div>
+              <div style={{fontSize:24,fontWeight:700,color:"var(--brand)"}}>2 hours</div>
+            </div>
+
+            <div className="contact-card" style={{textAlign:"center"}}>
+              <div style={{fontSize:40,marginBottom:12}}>🏰</div>
+              <div style={{fontWeight:600,fontSize:18,marginBottom:8}}>Galle</div>
+              <div style={{fontSize:24,fontWeight:700,color:"var(--brand)"}}>30 minutes</div>
+            </div>
+
+            <div className="contact-card" style={{textAlign:"center"}}>
+              <div style={{fontSize:40,marginBottom:12}}>🏄</div>
+              <div style={{fontWeight:600,fontSize:18,marginBottom:8}}>Ahangama</div>
+              <div style={{fontSize:24,fontWeight:700,color:"var(--brand)"}}>15 minutes</div>
+            </div>
+
+            <div className="contact-card" style={{textAlign:"center"}}>
+              <div style={{fontSize:40,marginBottom:12}}>🐘</div>
+              <div style={{fontWeight:600,fontSize:18,marginBottom:8}}>Yala</div>
+              <div style={{fontSize:24,fontWeight:700,color:"var(--brand)"}}>2:30 hours</div>
+            </div>
+
           </div>
         </div>
 
