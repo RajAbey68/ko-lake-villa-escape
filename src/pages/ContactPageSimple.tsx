@@ -57,8 +57,11 @@ export default function ContactPageSimple() {
                 <div style={{fontSize:32}}>📍</div>
                 <div>
                   <div style={{fontWeight:600,marginBottom:4}}>Location</div>
-                  <div>Ahangama, Koggala Lake</div>
-                  <div style={{fontSize:14,color:"var(--muted)"}}>Southern Province, Sri Lanka</div>
+                  <div>Mirissane Ovita</div>
+                  <div>Madolduwa Road</div>
+                  <div>Kathaluwa West</div>
+                  <div>Ahangama 80650</div>
+                  <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>Southern Province, Sri Lanka</div>
                 </div>
               </div>
               <div className="contact-item">
