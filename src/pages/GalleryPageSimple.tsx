@@ -1,5 +1,7 @@
-// Simple Gallery Page - Self-contained, no database
+// Simple Gallery Page - Self-contained Gallery Page
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
 import PoolSunsetImg from "@/assets/PoolSunset.jpg";
 import Room1Img from "@/assets/1 (3).jpg";
 import Room2Img from "@/assets/2 (5).jpg";
@@ -25,7 +27,9 @@ const GALLERY_IMAGES = [
 ];
 
 export default function GalleryPageSimple() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const handleBookingClick = () => navigate('/contact');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <>
@@ -53,23 +57,7 @@ export default function GalleryPageSimple() {
       `}</style>
 
       {/* Header */}
-      <header className="sticky">
-        <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <strong>Ko Lake • Ahangama</strong>
-          </div>
-          <nav className="nav" style={{ display: "flex" }}>
-            <a href="/">Home</a>
-            <a href="/rooms">Rooms</a>
-            <a href="/gallery">Gallery</a>
-            <a href="/amenities">Amenities</a>
-            <a href="/deals">Deals</a>
-            <a href="/contact">Contact</a>
-            <a href="/admin" style={{ fontSize: 14, opacity: 0.7, fontWeight: 600 }}>Staff</a>
-            <a className="btn btn-primary" href="/book">Book Now</a>
-          </nav>
-        </div>
-      </header>
+      <Navigation onBookingClick={handleBookingClick} />
 
       {/* Gallery */}
       <main className="container">

@@ -1,5 +1,12 @@
-// Self-contained Contact Page - No database dependency
+// Self-contained Contact Page
+import { Navigation } from "@/components/Navigation";
+
 export default function ContactPageSimple() {
+  const handleBookingClick = () => {
+    // Already on contact page, scroll to form
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <>
       <style>{`
@@ -17,16 +24,7 @@ export default function ContactPageSimple() {
         .contact-item:last-child{border:none}
       `}</style>
 
-      <header className="sticky">
-        <div className="container" style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"16px"}}>
-          <strong>Ko Lake • Ahangama</strong>
-          <nav className="nav">
-            <a href="/">Home</a><a href="/rooms">Rooms</a><a href="/gallery">Gallery</a>
-            <a href="/amenities">Amenities</a><a href="/deals">Deals</a><a href="/contact">Contact</a>
-            <a className="btn btn-primary" href="/book">Book Now</a>
-          </nav>
-        </div>
-      </header>
+      <Navigation onBookingClick={handleBookingClick} />
 
       <section style={{background:"linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%)",padding:"64px 0"}}>
         <div className="container" style={{textAlign:"center"}}>

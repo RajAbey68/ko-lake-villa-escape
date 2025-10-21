@@ -1,6 +1,8 @@
 // Simple 7-Room STR site for React + Vite (self-contained CSS)
 // Flow: Hero → Availability → Rooms (7) → Gallery → Amenities → Map → Reviews → Contact
 import { useMemo, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
 import PoolSunsetImg from "@/assets/PoolSunset.jpg";
 import Room1Img from "@/assets/1 (3).jpg";
 import Room2Img from "@/assets/2 (5).jpg";
@@ -22,8 +24,11 @@ const ROOMS = [
 ];
 
 export default function SimpleHome() {
+  const navigate = useNavigate();
   const year = useMemo(() => new Date().getFullYear(), []);
   const today = useMemo(() => new Date().toISOString().split('T')[0], []);
+  
+  const handleBookingClick = () => navigate('/contact');
   
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
@@ -140,28 +145,8 @@ export default function SimpleHome() {
         footer{border-top:1px solid var(--line);color:var(--muted);text-align:center;padding:20px}
       `}</style>
 
-      {/* Top bar */}
-      <header className="sticky">
-        <div className="container" style={{ padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <img 
-              src="/ko-lake-logo.jpg" 
-              alt="Ko Lake" 
-              style={{ width: 56, height: 56, objectFit: "contain", borderRadius: "50%" }}
-            />
-            <strong>Ko Lake • Ahangama</strong>
-          </div>
-          <nav className="nav" style={{ display: "flex" }}>
-            <a href="/rooms">Rooms</a>
-            <a href="/gallery">Gallery</a>
-            <a href="/amenities">Amenities</a>
-            <a href="/deals">Deals</a>
-            <a href="/contact">Contact</a>
-            <a href="/admin" style={{ fontSize: 14, opacity: 0.7, fontWeight: 600 }}>Staff</a>
-            <a className="btn btn-primary" href="/book">Book Now</a>
-          </nav>
-        </div>
-      </header>
+      {/* Navigation */}
+      <Navigation onBookingClick={handleBookingClick} />
 
       {/* Hero */}
       <section className="hero" data-testid="hero">

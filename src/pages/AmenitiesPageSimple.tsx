@@ -1,4 +1,6 @@
 // Self-contained Amenities/Experiences Page - No database dependency
+import { useNavigate } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
 import PoolSunsetImg from "@/assets/PoolSunset.jpg";
 
 const AMENITIES = [
@@ -35,6 +37,8 @@ const AMENITIES = [
 ];
 
 export default function AmenitiesPageSimple() {
+  const navigate = useNavigate();
+  const handleBookingClick = () => navigate('/contact');
   return (
     <>
       <style>{`
@@ -52,16 +56,7 @@ export default function AmenitiesPageSimple() {
         .card li:before{content:"✓";color:var(--brand);font-weight:700}
       `}</style>
 
-      <header className="sticky">
-        <div className="container" style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"16px"}}>
-          <strong>Ko Lake • Ahangama</strong>
-          <nav className="nav">
-            <a href="/">Home</a><a href="/rooms">Rooms</a><a href="/gallery">Gallery</a>
-            <a href="/amenities">Amenities</a><a href="/deals">Deals</a><a href="/contact">Contact</a>
-            <a className="btn btn-primary" href="/book">Book Now</a>
-          </nav>
-        </div>
-      </header>
+      <Navigation onBookingClick={handleBookingClick} />
 
       <section style={{backgroundImage:`linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(${PoolSunsetImg})`,backgroundSize:"cover",backgroundPosition:"center",padding:"100px 0",color:"white"}}>
         <div className="container" style={{textAlign:"center"}}>
