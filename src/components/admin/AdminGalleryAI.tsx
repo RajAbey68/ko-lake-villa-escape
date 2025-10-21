@@ -195,6 +195,7 @@ Return as JSON with keys: title, description, altText, category, keywords (array
     } catch (error) {
       console.error('AI analysis error:', error);
       // Set default metadata on error
+      const currentUpload = pendingUploads[index];
       setPendingUploads(prev => {
         const updated = [...prev];
         updated[index] = {
@@ -202,7 +203,7 @@ Return as JSON with keys: title, description, altText, category, keywords (array
           status: 'ready',
           progress: 100,
           aiMetadata: {
-            title: upload.file.name.replace(/\.[^/.]+$/, ''),
+            title: currentUpload.file.name.replace(/\.[^/.]+$/, ''),
             description: 'Ko Lake Villa',
             altText: 'Ko Lake Villa property',
             category: 'villa',
