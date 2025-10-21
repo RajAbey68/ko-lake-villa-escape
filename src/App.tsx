@@ -8,6 +8,7 @@ import SimpleIndex from "./pages/SimpleIndex";
 import SimpleHome from "./pages/SimpleHome";
 import NotFound from "./pages/NotFound";
 import GalleryPage from "./pages/GalleryPage";
+import GalleryPageSimple from "./pages/GalleryPageSimple";
 import ContactPage from "./pages/ContactPage";
 import AccommodationPage from "./pages/AccommodationPage";
 import ExperiencesPage from "./pages/ExperiencesPage";
@@ -32,7 +33,8 @@ const App = () => (
             <Route path="/legacy-home" element={<SimpleIndex />} />
             <Route path="/rooms" element={<AccommodationPage />} />
             <Route path="/accommodation" element={<AccommodationPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/gallery" element={<GalleryPageSimple />} />
+            <Route path="/gallery-admin" element={<GalleryPage />} />
             <Route path="/amenities" element={<ExperiencesPage />} />
             <Route path="/experiences" element={<ExperiencesPage />} />
             <Route path="/deals" element={<DealsPage />} />
