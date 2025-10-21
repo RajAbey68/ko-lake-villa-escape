@@ -16,7 +16,8 @@ import { AdminLocationInfo } from '@/components/admin/AdminLocationInfo';
 import { AdminContactSubmissions } from '@/components/admin/AdminContactSubmissions';
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { AdminGuestyTest } from '@/components/admin/AdminGuestyTest';
-import { AdminAIAssistant } from '@/components/admin/AdminAIAssistant';
+// TEMPORARILY DISABLED: AI Assistant requires APP_CONFIG_JSON secret in Supabase
+// import { AdminAIAssistant } from '@/components/admin/AdminAIAssistant';
 import { AdminShadowPages } from '@/components/admin/AdminShadowPages';
 import { Shield, Users, Bed, Star, Image, MessageSquare, MapPin, BarChart, Settings, Sparkles, FileEdit } from 'lucide-react';
 
@@ -75,7 +76,7 @@ const AdminPage = () => {
         </Card>
 
         <Tabs defaultValue="gallery" className="space-y-4">
-          <TabsList className="grid grid-cols-4 lg:grid-cols-11 w-full">
+          <TabsList className="grid grid-cols-4 lg:grid-cols-10 w-full">
             <TabsTrigger value="setup" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
               <span className="hidden sm:inline">Setup</span>
@@ -116,10 +117,11 @@ const AdminPage = () => {
               <Settings className="h-4 w-4" />
               <span className="hidden sm:inline">Guesty</span>
             </TabsTrigger>
-            <TabsTrigger value="ai" className="flex items-center gap-2">
+            {/* TEMPORARILY DISABLED: AI Assistant requires APP_CONFIG_JSON secret in Supabase */}
+            {/* <TabsTrigger value="ai" className="flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">AI Test</span>
-            </TabsTrigger>
+            </TabsTrigger> */}
             <TabsTrigger value="shadow" className="flex items-center gap-2">
               <FileEdit className="h-4 w-4" />
               <span className="hidden sm:inline">Shadow CMS</span>
@@ -178,9 +180,10 @@ const AdminPage = () => {
             <AdminGuestyTest />
           </TabsContent>
 
-          <TabsContent value="ai">
+          {/* TEMPORARILY DISABLED: AI Assistant requires APP_CONFIG_JSON secret in Supabase */}
+          {/* <TabsContent value="ai">
             <AdminAIAssistant />
-          </TabsContent>
+          </TabsContent> */}
 
           <TabsContent value="shadow">
             <AdminShadowPages />
