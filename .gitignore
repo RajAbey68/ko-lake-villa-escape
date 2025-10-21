@@ -1,4 +1,5 @@
 node_modules
+dist
 .env
 .env.local
 API_SECRETS_AUDIT.md
