@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
-import { KoLakeBooking } from "@/components/KoLakeBooking";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Users, Star, Gift, Sparkles } from "lucide-react";
 
 const DealsPage = () => {
-  const [bookingOpen, setBookingOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Special Offers & Packages | Ko Lake Villa";
@@ -15,7 +15,7 @@ const DealsPage = () => {
     if (desc) desc.setAttribute("content", "Discover exclusive packages and special offers at Ko Lake Villa. Save on luxury lakefront accommodations with our curated deals.");
   }, []);
 
-  const handleBookingClick = () => setBookingOpen(true);
+  const handleBookingClick = () => navigate('/contact');
 
   const deals = [
     {
@@ -303,8 +303,6 @@ const DealsPage = () => {
           </div>
         </section>
       </main>
-
-      <KoLakeBooking isOpen={bookingOpen} onOpenChange={setBookingOpen} />
     </div>
   );
 };

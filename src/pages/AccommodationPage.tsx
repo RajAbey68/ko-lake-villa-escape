@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Rooms } from "@/components/Rooms";
-import { KoLakeBooking } from "@/components/KoLakeBooking";
 import { PropertyDetailsCard } from "@/components/PropertyDetailsCard";
 import { PropertyAvailabilityCalendar } from "@/components/PropertyAvailabilityCalendar";
 
 const AccommodationPage = () => {
-  const [bookingOpen, setBookingOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Accommodation | Ko Lake Villa";
@@ -14,7 +14,7 @@ const AccommodationPage = () => {
     if (desc) desc.setAttribute("content", "View Ko Lake Villa rooms and rates. Luxury villas with lake views, premium amenities, and direct booking savings.");
   }, []);
 
-  const handleBookingClick = () => setBookingOpen(true);
+  const handleBookingClick = () => navigate('/contact');
 
   return (
     <div className="min-h-screen bg-background">
@@ -35,7 +35,6 @@ const AccommodationPage = () => {
           <Rooms onBookingClick={handleBookingClick} />
         </section>
       </main>
-      <KoLakeBooking isOpen={bookingOpen} onOpenChange={setBookingOpen} />
     </div>
   );
 };

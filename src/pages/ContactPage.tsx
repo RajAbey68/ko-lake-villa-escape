@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { KoLakeContact } from "@/components/KoLakeContact";
-import { KoLakeBooking } from "@/components/KoLakeBooking";
 
 const ContactPage = () => {
-  const [bookingOpen, setBookingOpen] = useState(false);
-
   useEffect(() => {
-    document.title = "Contact | Ko Lake Villa";
+    document.title = "Contact Us | Ko Lake Villa";
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", "Contact Ko Lake Villa for reservations, inquiries, and bespoke experiences by the lake in Sri Lanka.");
+    if (desc) desc.setAttribute("content", "Get in touch with Ko Lake Villa. Book your stay, ask questions, or request information about our luxury lakefront accommodation.");
   }, []);
 
-  const handleBookingClick = () => setBookingOpen(true);
+  const handleBookingClick = () => {
+    // Already on contact page, scroll to form
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -20,7 +20,6 @@ const ContactPage = () => {
       <main>
         <KoLakeContact onBookingClick={handleBookingClick} />
       </main>
-      <KoLakeBooking isOpen={bookingOpen} onOpenChange={setBookingOpen} />
     </div>
   );
 };

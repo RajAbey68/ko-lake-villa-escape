@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { DataDrivenHero } from "@/components/DataDrivenHero";
 import { Rooms } from "@/components/Rooms";
@@ -6,13 +6,12 @@ import { Gallery } from "@/components/Gallery";
 import { DataDrivenAmenities } from "@/components/DataDrivenAmenities";
 import { DataDrivenLocation } from "@/components/DataDrivenLocation";
 import { KoLakeContact } from "@/components/KoLakeContact";
-import { KoLakeBooking } from "@/components/KoLakeBooking";
 
 const Index = () => {
-  const [bookingOpen, setBookingOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleBookingClick = () => {
-    setBookingOpen(true);
+    navigate('/contact');
   };
 
   return (
@@ -28,8 +27,6 @@ const Index = () => {
         <DataDrivenLocation />
         <KoLakeContact onBookingClick={handleBookingClick} />
       </main>
-      <KoLakeBooking isOpen={bookingOpen} onOpenChange={setBookingOpen} />
-      
     </div>
   );
 };
