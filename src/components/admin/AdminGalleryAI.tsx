@@ -50,7 +50,7 @@ export const AdminGalleryAI = () => {
   const [pendingUploads, setPendingUploads] = useState<PendingUpload[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  const { data: galleryItems = [], isLoading } = useQuery({
+  const { data: galleryItems = [], isLoading, error: queryError } = useQuery({
     queryKey: ['admin-gallery'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -58,9 +58,14 @@ export const AdminGalleryAI = () => {
         .select('*')
         .order('display_order', { ascending: true })
         .order('created_at', { ascending: false });
-      if (error) throw error;
+      if (error) {
+        console.error('Gallery query error:', error);
+        throw error;
+      }
       return (data || []) as GalleryItem[];
     },
+    retry: 1,
+    staleTime: 30000, // Cache for 30 seconds
   });
 
   const deleteMutation = useMutation({
@@ -120,9 +125,16 @@ export const AdminGalleryAI = () => {
 
   // Upload file to Supabase Storage
   const uploadFile = async (upload: PendingUpload, index: number): Promise<string> => {
+    console.log('🔵 Starting upload for:', upload.file.name);
+    console.log('File size:', upload.file.size, 'bytes');
+    console.log('File type:', upload.file.type);
+    
     const fileExt = upload.file.name.split('.').pop();
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
     const filePath = fileName;
+
+    console.log('Upload path:', filePath);
+    console.log('Bucket: gallery');
 
     setPendingUploads(prev => {
       const updated = [...prev];
@@ -130,18 +142,32 @@ export const AdminGalleryAI = () => {
       return updated;
     });
 
-    const { error: uploadError } = await supabase.storage
+    console.log('Attempting upload to Supabase storage...');
+    const { data: uploadData, error: uploadError } = await supabase.storage
       .from('gallery')
       .upload(filePath, upload.file, {
         cacheControl: '3600',
         upsert: false
       });
 
-    if (uploadError) throw uploadError;
+    if (uploadError) {
+      console.error('❌ Upload error:', uploadError);
+      console.error('Error details:', {
+        message: uploadError.message,
+        statusCode: uploadError.statusCode,
+        error: uploadError.error,
+        name: uploadError.name
+      });
+      throw uploadError;
+    }
+
+    console.log('✅ Upload successful:', uploadData);
 
     const { data: { publicUrl } } = supabase.storage
       .from('gallery')
       .getPublicUrl(filePath);
+
+    console.log('✅ Public URL:', publicUrl);
 
     setPendingUploads(prev => {
       const updated = [...prev];
@@ -373,6 +399,22 @@ Return as JSON with keys: title, description, altText, category, keywords (array
     );
   }
 
+  if (queryError) {
+    return (
+      <Card>
+        <CardContent className="py-20 text-center">
+          <p className="text-destructive mb-4">⚠️ Gallery database not set up</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            Error: {(queryError as any).message || 'Unknown error'}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            You can still upload images - they'll be stored but won't appear in the list until the database is configured.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -513,7 +555,9 @@ Return as JSON with keys: title, description, altText, category, keywords (array
                           </Badge>
                         )}
                         {upload.status === 'error' && (
-                          <Badge variant="destructive">Error</Badge>
+                          <Badge variant="destructive">
+                            Error: {upload.error || 'Unknown error'}
+                          </Badge>
                         )}
                       </div>
 
