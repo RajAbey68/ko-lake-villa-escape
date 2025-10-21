@@ -151,6 +151,98 @@ export default function ContactPageSimple() {
           </div>
         </div>
 
+        {/* WhatsApp Contact Cards */}
+        <div style={{marginTop:64}}>
+          <h2 style={{fontSize:28,margin:"0 0 24px",textAlign:"center"}}>Direct Contact</h2>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
+            
+            {/* Manager WhatsApp */}
+            <div className="contact-card">
+              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+                <div style={{width:48,height:48,borderRadius:12,background:"#dcfce7",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <span style={{fontSize:24}}>📱</span>
+                </div>
+                <div style={{fontWeight:600,fontSize:18}}>Manager WhatsApp</div>
+              </div>
+              <div style={{marginBottom:12}}>
+                <a href="https://wa.me/94711730345" style={{color:"var(--brand)",fontSize:16,fontWeight:600}}>+94 71 173 0345</a>
+                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>Available 24/7</div>
+              </div>
+              <a 
+                href="https://wa.me/94711730345?text=Hi! I'd like to inquire about Ko Lake Villa" 
+                className="btn" 
+                style={{width:"100%",background:"#25D366",color:"white",border:"none"}}
+              >
+                💬 WhatsApp Manager
+              </a>
+            </div>
+
+            {/* Villa Team Leader */}
+            <div className="contact-card">
+              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+                <div style={{width:48,height:48,borderRadius:12,background:"#dbeafe",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <span style={{fontSize:24}}>👨‍💼</span>
+                </div>
+                <div style={{fontWeight:600,fontSize:18}}>Villa Team Leader</div>
+              </div>
+              <div style={{marginBottom:12}}>
+                <div style={{color:"var(--ink)",fontSize:16,fontWeight:600}}>+94 71 173 0345</div>
+                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>On-site assistance</div>
+              </div>
+              <a 
+                href="tel:+94711730345" 
+                className="btn btn-primary" 
+                style={{width:"100%"}}
+              >
+                📞 Call Team Leader
+              </a>
+            </div>
+
+            {/* Owner Contact */}
+            <div className="contact-card">
+              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+                <div style={{width:48,height:48,borderRadius:12,background:"#fef3c7",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <span style={{fontSize:24}}>👤</span>
+                </div>
+                <div style={{fontWeight:600,fontSize:18}}>Owner Contact</div>
+              </div>
+              <div style={{marginBottom:12}}>
+                <div style={{color:"var(--ink)",fontSize:16,fontWeight:600}}>+94 71 173 0345</div>
+                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>Direct line</div>
+              </div>
+              <a 
+                href="https://wa.me/94711730345?text=Hello, I'd like to speak with the owner about Ko Lake Villa" 
+                className="btn" 
+                style={{width:"100%",background:"#25D366",color:"white",border:"none"}}
+              >
+                💬 WhatsApp Owner
+              </a>
+            </div>
+
+            {/* WhatsApp Group */}
+            <div className="contact-card">
+              <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
+                <div style={{width:48,height:48,borderRadius:12,background:"#dcfce7",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <span style={{fontSize:24}}>👥</span>
+                </div>
+                <div style={{fontWeight:600,fontSize:18}}>WhatsApp Group</div>
+              </div>
+              <div style={{marginBottom:12}}>
+                <div style={{fontSize:14,color:"var(--muted)"}}>Join our guest group</div>
+                <div style={{fontSize:14,color:"var(--muted)",marginTop:4}}>Instant support & updates</div>
+              </div>
+              <button 
+                className="btn" 
+                style={{width:"100%",background:"#25D366",color:"white",border:"none"}}
+                disabled
+              >
+                💬 Join Group (Coming Soon)
+              </button>
+            </div>
+
+          </div>
+        </div>
+
         <div style={{marginTop:64}}>
           <h2 style={{fontSize:28,margin:"0 0 16px",textAlign:"center"}}>Find Us on the Map</h2>
           <div style={{border:"1px solid var(--line)",borderRadius:16,overflow:"hidden"}}>
