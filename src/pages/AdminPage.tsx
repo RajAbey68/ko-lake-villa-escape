@@ -9,7 +9,7 @@ import { Navigation } from '@/components/Navigation';
 import { AdminBookings } from '@/components/admin/AdminBookings';
 import { AdminRoomTypes } from '@/components/admin/AdminRoomTypes';
 import { AdminAmenities } from '@/components/admin/AdminAmenities';
-import { AdminGallery } from '@/components/admin/AdminGallery';
+import { AdminGallerySimple as AdminGallery } from '@/components/admin/AdminGallerySimple';
 import { AdminDatabaseSeed } from '@/components/admin/AdminDatabaseSeed';
 import { AdminHeroContent } from '@/components/admin/AdminHeroContent';
 import { AdminLocationInfo } from '@/components/admin/AdminLocationInfo';
