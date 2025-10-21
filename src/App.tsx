@@ -11,6 +11,7 @@ import GalleryPage from "./pages/GalleryPage";
 import GalleryPageSimple from "./pages/GalleryPageSimple";
 import ContactPage from "./pages/ContactPage";
 import AccommodationPage from "./pages/AccommodationPage";
+import RoomsPageSimple from "./pages/RoomsPageSimple";
 import ExperiencesPage from "./pages/ExperiencesPage";
 import DealsPage from "./pages/DealsPage";
 import AuthPage from "./pages/AuthPage";
@@ -31,8 +32,9 @@ const App = () => (
             <Route path="/" element={<SimpleHome />} />
             <Route path="/old-home" element={<Index />} />
             <Route path="/legacy-home" element={<SimpleIndex />} />
-            <Route path="/rooms" element={<AccommodationPage />} />
-            <Route path="/accommodation" element={<AccommodationPage />} />
+            <Route path="/rooms" element={<RoomsPageSimple />} />
+            <Route path="/accommodation" element={<RoomsPageSimple />} />
+            <Route path="/rooms-admin" element={<AccommodationPage />} />
             <Route path="/gallery" element={<GalleryPageSimple />} />
             <Route path="/gallery-admin" element={<GalleryPage />} />
             <Route path="/amenities" element={<ExperiencesPage />} />
