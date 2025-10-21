@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
 import SimpleIndex from "./pages/SimpleIndex";
-import SimpleHome from "./pages/SimpleHomeClean";
+import SimpleHome from "./pages/SimpleHome";
 import NotFound from "./pages/NotFound";
 import GalleryPage from "./pages/GalleryPage";
 import ContactPage from "./pages/ContactPage";
