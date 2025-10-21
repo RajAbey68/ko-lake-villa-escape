@@ -147,28 +147,8 @@ export default function SimpleHome() {
             <img 
               src="/ko-lake-logo.jpg" 
               alt="Ko Lake" 
-              style={{ width: 56, height: 56, objectFit: "contain" }}
-              onError={(e) => {
-                // Fallback to placeholder if logo not found
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling?.classList.add('show-placeholder');
-              }}
+              style={{ width: 56, height: 56, objectFit: "contain", borderRadius: "50%" }}
             />
-            <div 
-              style={{ 
-                width: 56, 
-                height: 56, 
-                borderRadius: "50%", 
-                background: "linear-gradient(135deg, #d26a1b 0%, #e88a3d 100%)",
-                display: "none",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontSize: 24,
-                fontWeight: 700
-              }}
-              className="logo-placeholder"
-            >KL</div>
             <strong>Ko Lake • Ahangama</strong>
           </div>
           <nav className="nav" style={{ display: "flex" }}>
@@ -184,13 +164,13 @@ export default function SimpleHome() {
       </header>
 
       {/* Hero */}
-      <section className="hero">
+      <section className="hero" data-testid="hero">
         <img src={PoolSunsetImg} alt="Ko Lake luxury villa pool at sunset overlooking Koggala Lake, Ahangama Sri Lanka" />
         <div className="copy">
           <div className="container">
             <div style={{ maxWidth: 900 }}>
               <h1>Lakeside Holiday Rental for Surfers, Digital Nomads & Families</h1>
-              <p>7 rooms • Unlimited WiFi • Private chef • Lake access • Near surf spots & wildlife safaris • Pet friendly</p>
+              <p>7 rooms on Koggala Lake • Unlimited WiFi • Private chef • Lake access • Near surf spots & wildlife safaris • Pet friendly</p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                 <a href="#book" className="btn btn-primary">Check Availability</a>
                 <a href="#rooms" className="btn btn-ghost">Browse Rooms</a>
@@ -201,7 +181,7 @@ export default function SimpleHome() {
       </section>
 
       {/* Availability */}
-      <section id="book" className="strip">
+      <section id="book" className="strip" data-testid="stats">
         <div className="container" style={{ padding: "24px 16px" }}>
           <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", justifyContent: "center" }}>
             <input 
@@ -284,9 +264,9 @@ export default function SimpleHome() {
       </section>
 
       {/* Rooms */}
-      <section id="rooms" className="container" style={{ padding: "48px 16px" }}>
+      <section id="rooms" className="container" style={{ padding: "48px 16px" }} data-testid="rooms-section">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 12 }}>
-          <h2 style={{ margin: 0, fontSize: 28 }}>Rooms & Suites</h2>
+          <h2 style={{ margin: 0, fontSize: 32, fontWeight: 600 }}>Rooms & Suites</h2>
           <a href="#book" style={{ color: "var(--brand)" }}>See availability →</a>
         </div>
 
@@ -309,9 +289,9 @@ export default function SimpleHome() {
       </section>
 
       {/* Gallery */}
-      <section id="gallery" className="strip">
+      <section id="gallery" className="strip" data-testid="gallery-section">
         <div className="container" style={{ padding: "48px 16px" }}>
-          <h2 style={{ marginTop: 0, fontSize: 28 }}>Gallery</h2>
+          <h2 style={{ marginTop: 0, fontSize: 32, fontWeight: 600 }}>Gallery</h2>
           <div className="masonry" style={{ marginTop: 16 }}>
             {[
               Room1Img,
@@ -332,7 +312,7 @@ export default function SimpleHome() {
 
       {/* Amenities */}
       <section id="amenities" className="container" style={{ padding: "48px 16px" }}>
-        <h2 style={{ fontSize: 28, marginTop: 0 }}>Amenities</h2>
+        <h2 style={{ fontSize: 32, fontWeight: 600, marginTop: 0 }}>Amenities</h2>
         <div className="grid grid-3" style={{ marginTop: 16 }}>
           {[
             "Private chef on request (Sri Lankan / Indian / Western)",
@@ -358,7 +338,7 @@ export default function SimpleHome() {
       {/* Map */}
       <section id="map" className="strip">
         <div className="container" style={{ padding: "48px 16px" }}>
-          <h2 style={{ marginTop: 0, fontSize: 28 }}>Where we are</h2>
+          <h2 style={{ marginTop: 0, fontSize: 32, fontWeight: 600 }}>Where we are</h2>
           <p className="muted">Ahangama • on the shores of Koggala Lake • 10–15 mins to surf beaches.</p>
           <div style={{ marginTop: 12, border: "1px solid var(--line)", borderRadius: 16, overflow: "hidden" }}>
             <iframe
@@ -374,7 +354,7 @@ export default function SimpleHome() {
 
       {/* Reviews */}
       <section className="container" style={{ padding: "48px 16px" }}>
-        <h2 style={{ marginTop: 0, fontSize: 28 }}>Guest Reviews</h2>
+        <h2 style={{ marginTop: 0, fontSize: 32, fontWeight: 600 }}>Guest Reviews</h2>
         <div className="grid grid-3" style={{ marginTop: 16 }}>
           {[
             "Perfect base for surfing & lake safaris.",
@@ -390,22 +370,21 @@ export default function SimpleHome() {
       </section>
 
       {/* Contact */}
-      <section id="contact" style={{ background: "var(--brand)", color: "var(--brand-ink)" }}>
-        <div className="container" style={{ padding: "48px 16px" }}>
-          <div className="grid grid-2">
-            <div>
-              <h2 style={{ marginTop: 0, fontSize: 28 }}>Ready to book?</h2>
-              <p style={{ opacity: .9 }}>Best rates direct. Ask about full-villa pricing and chef packages.</p>
-            </div>
-            <form className="grid" style={{ gap: 12 }}>
-              <div className="grid grid-2" style={{ gap: 12 }}>
-                <input className="field" placeholder="Your name" />
-                <input className="field" placeholder="Email or WhatsApp" />
-              </div>
-              <textarea className="field" rows={4} placeholder="Dates / questions" />
-              <button type="button" className="btn btn-ghost">Send enquiry</button>
-            </form>
-          </div>
+      <section id="contact" style={{ background: "var(--brand)", color: "var(--brand-ink)" }} data-testid="contact-section">
+        <div className="container" style={{ padding: "64px 16px", textAlign: "center" }}>
+          <h2 style={{ marginTop: 0, fontSize: 32, fontWeight: 600 }}>Ready for Your Lake Escape?</h2>
+          <p style={{ opacity: .95, fontSize: 20, maxWidth: 700, margin: "20px auto 40px", lineHeight: 1.6 }}>
+            🌟 Best rates guaranteed when you book direct • Full-villa packages • Private chef experiences • Flexible dates
+          </p>
+          <a href="/contact" className="btn btn-ghost" style={{ 
+            fontSize: 20, 
+            padding: "18px 48px", 
+            fontWeight: 700,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            transition: "all 0.3s ease"
+          }}>
+            Book Your Stay Now →
+          </a>
         </div>
       </section>
 

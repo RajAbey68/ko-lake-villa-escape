@@ -13,7 +13,10 @@ import ContactPage from "./pages/ContactPage";
 import AccommodationPage from "./pages/AccommodationPage";
 import RoomsPageSimple from "./pages/RoomsPageSimple";
 import ExperiencesPage from "./pages/ExperiencesPage";
+import AmenitiesPageSimple from "./pages/AmenitiesPageSimple";
 import DealsPage from "./pages/DealsPage";
+import DealsPageSimple from "./pages/DealsPageSimple";
+import ContactPageSimple from "./pages/ContactPageSimple";
 import AuthPage from "./pages/AuthPage";
 import AdminPage from "./pages/AdminPage";
 import VideoPage from "./pages/VideoPage";
@@ -37,10 +40,13 @@ const App = () => (
             <Route path="/rooms-admin" element={<AccommodationPage />} />
             <Route path="/gallery" element={<GalleryPageSimple />} />
             <Route path="/gallery-admin" element={<GalleryPage />} />
-            <Route path="/amenities" element={<ExperiencesPage />} />
-            <Route path="/experiences" element={<ExperiencesPage />} />
-            <Route path="/deals" element={<DealsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/amenities" element={<AmenitiesPageSimple />} />
+            <Route path="/experiences" element={<AmenitiesPageSimple />} />
+            <Route path="/amenities-admin" element={<ExperiencesPage />} />
+            <Route path="/deals" element={<DealsPageSimple />} />
+            <Route path="/deals-admin" element={<DealsPage />} />
+            <Route path="/contact" element={<ContactPageSimple />} />
+            <Route path="/contact-admin" element={<ContactPage />} />
             <Route path="/book" element={<BookingPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/admin" element={<AdminPage />} />

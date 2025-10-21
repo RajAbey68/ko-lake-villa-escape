@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const baseURL = process.env.BASE_URL || 'http://localhost:8091';
+const baseURL = process.env.BASE_URL || 'http://localhost:8080';
 
 export default defineConfig({
   testDir: './e2e',
@@ -24,8 +24,8 @@ export default defineConfig({
   webServer: process.env.BASE_URL
     ? undefined
     : {
-        command: 'VITE_E2E=true npm run dev -- --port 8091',
-        url: 'http://localhost:8091',
-        reuseExistingServer: false,
+        command: 'VITE_E2E=true npm run dev -- --port 8080',
+        url: 'http://localhost:8080',
+        reuseExistingServer: true,
       },
 });

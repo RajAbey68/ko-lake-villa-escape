@@ -41,8 +41,9 @@ test.describe('Homepage - User Experience', () => {
     // Should see navigation
     await expect(page.getByRole('navigation')).toBeVisible();
     
-    // Should have menu items
-    await expect(page.getByRole('link', { name: /home/i })).toBeVisible();
+    // Should have menu items - use exact match to avoid duplicates
+    await expect(page.getByRole('link', { name: 'Rooms', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Gallery', exact: true })).toBeVisible();
   });
 
   test('contact section should be accessible', async ({ page }) => {
