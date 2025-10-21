@@ -74,20 +74,48 @@ export const AdminGalleryAI = () => {
     },
   });
 
-  // Handle file selection
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Handle file selection - Upload immediately with default metadata (skip AI)
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
 
     const newUploads: PendingUpload[] = files.map(file => ({
       file,
       preview: URL.createObjectURL(file),
-      status: 'pending',
+      status: 'uploading',
       progress: 0,
+      aiMetadata: {
+        title: file.name.replace(/\.[^/.]+$/, ''),
+        description: 'Ko Lake Villa',
+        altText: 'Ko Lake Villa property',
+        category: 'villa',
+        keywords: []
+      }
     }));
 
     setPendingUploads(prev => [...prev, ...newUploads]);
     setIsUploadDialogOpen(true);
+
+    // Upload files immediately (skip AI processing)
+    for (let i = 0; i < newUploads.length; i++) {
+      try {
+        const url = await uploadFile(newUploads[i], pendingUploads.length + i);
+        setPendingUploads(prev => {
+          const updated = [...prev];
+          const idx = prev.length - newUploads.length + i;
+          updated[idx] = { ...updated[idx], status: 'ready', progress: 100, url };
+          return updated;
+        });
+      } catch (error: any) {
+        console.error('Upload error:', error);
+        setPendingUploads(prev => {
+          const updated = [...prev];
+          const idx = prev.length - newUploads.length + i;
+          updated[idx] = { ...updated[idx], status: 'error', error: error.message };
+          return updated;
+        });
+      }
+    }
   };
 
   // Upload file to Supabase Storage
@@ -192,8 +220,17 @@ Return as JSON with keys: title, description, altText, category, keywords (array
         return updated;
       });
 
-    } catch (error) {
-      console.error('AI analysis error:', error);
+    } catch (error: any) {
+      console.error('❌ AI analysis error:', error);
+      console.error('Error details:', {
+        message: error.message,
+        status: error.status,
+        statusText: error.statusText,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+      });
+      
       // Set default metadata on error
       const currentUpload = pendingUploads[index];
       setPendingUploads(prev => {
@@ -202,6 +239,7 @@ Return as JSON with keys: title, description, altText, category, keywords (array
           ...updated[index],
           status: 'ready',
           progress: 100,
+          error: `AI failed: ${error.message || 'Unknown error'}`,
           aiMetadata: {
             title: currentUpload.file.name.replace(/\.[^/.]+$/, ''),
             description: 'Ko Lake Villa',
@@ -211,6 +249,12 @@ Return as JSON with keys: title, description, altText, category, keywords (array
           }
         };
         return updated;
+      });
+      
+      toast({
+        title: 'AI Analysis Failed',
+        description: `Using default metadata. Error: ${error.message || 'Unknown'}`,
+        variant: 'destructive'
       });
     }
   };
@@ -225,19 +269,30 @@ Return as JSON with keys: title, description, altText, category, keywords (array
         const url = await uploadFile(upload, i);
         await analyzeWithAI(url, i);
       } catch (error: any) {
-        console.error('Upload/AI error:', error);
+        console.error('❌ Upload/AI error for', upload.file.name, ':', error);
+        console.error('Full error object:', {
+          message: error.message,
+          status: error.status,
+          statusText: error.statusText,
+          details: error.details,
+          hint: error.hint,
+          code: error.code,
+          stack: error.stack
+        });
+        
         setPendingUploads(prev => {
           const updated = [...prev];
           updated[i] = {
             ...updated[i],
             status: 'error',
-            error: error.message || 'Processing failed'
+            error: `${error.message || 'Processing failed'} (${error.code || 'unknown'})`
           };
           return updated;
         });
+        
         toast({
           title: `Error: ${upload.file.name}`,
-          description: error.message || 'Upload or AI analysis failed',
+          description: `${error.message || 'Upload or AI analysis failed'} - Check browser console for details`,
           variant: 'destructive'
         });
       }
@@ -507,10 +562,22 @@ Return as JSON with keys: title, description, altText, category, keywords (array
                               <div><strong>Title:</strong> {upload.aiMetadata.title}</div>
                               <div><strong>Description:</strong> {upload.aiMetadata.description}</div>
                               <div><strong>Category:</strong> {upload.aiMetadata.category}</div>
-                              <Button size="sm" variant="outline" onClick={() => handleEditMetadata(index)}>
-                                <Edit className="h-3 w-3 mr-1" />
-                                Edit
-                              </Button>
+                              <div className="flex gap-2">
+                                <Button size="sm" variant="outline" onClick={() => handleEditMetadata(index)}>
+                                  <Edit className="h-3 w-3 mr-1" />
+                                  Edit Manually
+                                </Button>
+                                {upload.status === 'ready' && upload.url && (
+                                  <Button 
+                                    size="sm" 
+                                    variant="secondary"
+                                    onClick={() => analyzeWithAI(upload.url!, index)}
+                                  >
+                                    <Sparkles className="h-3 w-3 mr-1" />
+                                    Process with AI
+                                  </Button>
+                                )}
+                              </div>
                             </>
                           )}
                         </div>
@@ -529,16 +596,10 @@ Return as JSON with keys: title, description, altText, category, keywords (array
                 Cancel
               </Button>
               <div className="flex gap-2">
-                {pendingUploads.some(u => u.status === 'pending') && (
-                  <Button onClick={handleProcessUploads}>
-                    <Sparkles className="h-4 w-4 mr-2" />
-                    Process with AI
-                  </Button>
-                )}
                 {pendingUploads.some(u => u.status === 'ready') && (
                   <Button onClick={handlePublishAll} className="bg-green-600 hover:bg-green-700">
                     <CheckCircle className="h-4 w-4 mr-2" />
-                    Publish All
+                    Publish to Gallery ({pendingUploads.filter(u => u.status === 'ready').length})
                   </Button>
                 )}
               </div>
