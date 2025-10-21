@@ -1,10 +1,57 @@
 // Self-contained Contact Page
+import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function ContactPageSimple() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    countryCode: "+94",
+    phone: "",
+    subject: "",
+    message: ""
+  });
+  const [formStatus, setFormStatus] = useState<{type: 'success' | 'error', message: string} | null>(null);
+  
   const handleBookingClick = () => {
-    // Already on contact page, scroll to form
     document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus(null);
+    
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([{
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          phone: `${formData.countryCode}${formData.phone}`,
+          message: `Subject: ${formData.subject}\n\n${formData.message}`
+        }]);
+
+      if (error) throw error;
+
+      setFormStatus({type: 'success', message: "Message sent successfully! We'll get back to you within 24 hours."});
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        countryCode: "+94",
+        phone: "",
+        subject: "",
+        message: ""
+      });
+    } catch (error) {
+      setFormStatus({type: 'error', message: "Error sending message. Please try WhatsApp instead."});
+    }
+    
+    setIsSubmitting(false);
   };
 
   return (
@@ -22,6 +69,15 @@ export default function ContactPageSimple() {
         .contact-card{padding:32px;background:var(--wash);border-radius:16px;border:1px solid var(--line)}
         .contact-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
         .contact-item:last-child{border:none}
+        .field{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+        .field:focus{outline:none;border-color:var(--brand)}
+        select.field{cursor:pointer}
+        textarea.field{resize:vertical;min-height:120px;font-family:inherit}
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        @media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+        .alert{padding:12px;border-radius:8px;margin-bottom:16px}
+        .alert-success{background:#d1fae5;border:1px solid #10b981;color:#065f46}
+        .alert-error{background:#fee2e2;border:1px solid #ef4444;color:#991b1b}
       `}</style>
 
       <Navigation onBookingClick={handleBookingClick} />
@@ -96,7 +152,7 @@ export default function ContactPageSimple() {
         </div>
 
         <div style={{marginTop:64}}>
-          <h2 style={{fontSize:28,margin:"0 0 16px",textAlign:"center"}}>Find Us</h2>
+          <h2 style={{fontSize:28,margin:"0 0 16px",textAlign:"center"}}>Find Us on the Map</h2>
           <div style={{border:"1px solid var(--line)",borderRadius:16,overflow:"hidden"}}>
             <iframe
               title="Ko Lake Villa Location"
@@ -104,6 +160,142 @@ export default function ContactPageSimple() {
               style={{width:"100%",height:400,border:0}}
               loading="lazy"
             />
+          </div>
+        </div>
+
+        {/* Contact Form */}
+        <div id="contact-form" style={{marginTop:64}}>
+          <h2 style={{fontSize:28,margin:"0 0 16px",textAlign:"center"}}>Send us a Message</h2>
+          <p style={{textAlign:"center",color:"var(--muted)",marginBottom:32}}>Have a question or special request? We'd love to hear from you.</p>
+          
+          <div className="contact-card" style={{maxWidth:800,margin:"0 auto"}}>
+            {formStatus && (
+              <div className={`alert alert-${formStatus.type}`}>
+                {formStatus.message}
+              </div>
+            )}
+            
+            <form onSubmit={handleSubmit}>
+              <div className="form-grid" style={{marginBottom:16}}>
+                <div>
+                  <label style={{display:"block",marginBottom:8,fontWeight:600,fontSize:14}}>First Name *</label>
+                  <input 
+                    type="text" 
+                    className="field" 
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                    required 
+                  />
+                </div>
+                <div>
+                  <label style={{display:"block",marginBottom:8,fontWeight:600,fontSize:14}}>Last Name *</label>
+                  <input 
+                    type="text" 
+                    className="field" 
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({...formData, lastName: e.target.value})}
+                    required 
+                  />
+                </div>
+              </div>
+
+              <div style={{marginBottom:16}}>
+                <label style={{display:"block",marginBottom:8,fontWeight:600,fontSize:14}}>Email *</label>
+                <input 
+                  type="email" 
+                  className="field" 
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  required 
+                />
+              </div>
+
+              <div style={{marginBottom:16}}>
+                <label style={{display:"block",marginBottom:8,fontWeight:600,fontSize:14}}>Phone Number *</label>
+                <div style={{display:"flex",gap:8}}>
+                  <select 
+                    className="field" 
+                    style={{width:180}}
+                    value={formData.countryCode}
+                    onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                    required
+                  >
+                    <option value="+94">🇱🇰 Sri Lanka +94</option>
+                    <option value="+91">🇮🇳 India +91</option>
+                    <option value="+1">🇺🇸 USA +1</option>
+                    <option value="+44">🇬🇧 UK +44</option>
+                    <option value="+61">🇦🇺 Australia +61</option>
+                    <option value="+65">🇸🇬 Singapore +65</option>
+                    <option value="+60">🇲🇾 Malaysia +60</option>
+                    <option value="+66">🇹🇭 Thailand +66</option>
+                    <option value="+62">🇮🇩 Indonesia +62</option>
+                    <option value="+81">🇯🇵 Japan +81</option>
+                    <option value="+86">🇨🇳 China +86</option>
+                    <option value="+82">🇰🇷 South Korea +82</option>
+                    <option value="+33">🇫🇷 France +33</option>
+                    <option value="+49">🇩🇪 Germany +49</option>
+                    <option value="+39">🇮🇹 Italy +39</option>
+                    <option value="+34">🇪🇸 Spain +34</option>
+                    <option value="+64">🇳🇿 New Zealand +64</option>
+                    <option value="+27">🇿🇦 South Africa +27</option>
+                    <option value="+971">🇦🇪 UAE +971</option>
+                    <option value="+966">🇸🇦 Saudi Arabia +966</option>
+                  </select>
+                  <input 
+                    type="tel" 
+                    className="field" 
+                    placeholder="Phone number"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    style={{flex:1}}
+                    required 
+                  />
+                </div>
+              </div>
+
+              <div style={{marginBottom:16}}>
+                <label style={{display:"block",marginBottom:8,fontWeight:600,fontSize:14}}>Subject *</label>
+                <select 
+                  className="field"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                  required
+                >
+                  <option value="">Select a subject</option>
+                  <option value="reservation">Reservation Inquiry</option>
+                  <option value="general">General Information</option>
+                  <option value="special-requests">Special Requests</option>
+                  <option value="group-booking">Group Booking</option>
+                  <option value="wedding-events">Wedding & Events</option>
+                  <option value="spa-wellness">Spa & Wellness</option>
+                  <option value="dining">Dining Arrangements</option>
+                  <option value="activities">Activities & Experiences</option>
+                  <option value="transportation">Transportation</option>
+                  <option value="feedback">Feedback & Reviews</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div style={{marginBottom:24}}>
+                <label style={{display:"block",marginBottom:8,fontWeight:600,fontSize:14}}>Message *</label>
+                <textarea 
+                  className="field"
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  placeholder="Tell us about your inquiry or special requests..."
+                  required
+                />
+              </div>
+
+              <button 
+                type="submit" 
+                className="btn btn-primary" 
+                style={{width:"100%",fontSize:16,padding:"14px"}}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending..." : "📤 Send Message"}
+              </button>
+            </form>
           </div>
         </div>
       </main>
