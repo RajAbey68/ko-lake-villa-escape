@@ -1,6 +1,15 @@
 // Simple 7-Room STR site for React + Vite (self-contained CSS)
 // Flow: Hero → Availability → Rooms (7) → Gallery → Amenities → Map → Reviews → Contact
 import { useMemo, useState, useEffect, useRef } from "react";
+import PoolSunsetImg from "@/assets/PoolSunset.jpg";
+import Room1Img from "@/assets/1 (3).jpg";
+import Room2Img from "@/assets/2 (5).jpg";
+import Room3Img from "@/assets/3 (3).jpg";
+import Room4Img from "@/assets/4 (3).jpg";
+import Room6Img from "@/assets/6 (1).jpg";
+import Room8Img from "@/assets/8 (1).jpg";
+import Room9Img from "@/assets/9.jpg";
+import KoLakeSunsetImg from "@/assets/KoLakeSunset.jpeg";
 
 const ROOMS = [
   { key: "family-suite", name: "Family Suite (Pool & Stream)", pax: 4, size: "38 m²", blurb: "Family suite by the pool & stream; French doors; lounge.", price: 120 },
@@ -176,7 +185,7 @@ export default function SimpleHome() {
 
       {/* Hero */}
       <section className="hero">
-        <img src="/src/assets/PoolSunset.jpg" alt="Ko Lake luxury villa pool at sunset overlooking Koggala Lake, Ahangama Sri Lanka" />
+        <img src={PoolSunsetImg} alt="Ko Lake luxury villa pool at sunset overlooking Koggala Lake, Ahangama Sri Lanka" />
         <div className="copy">
           <div className="container">
             <div style={{ maxWidth: 900 }}>
@@ -284,7 +293,7 @@ export default function SimpleHome() {
         <div className="grid grid-3" style={{ marginTop: 16 }}>
           {ROOMS.map((r) => (
             <article className="room" key={r.key}>
-              <img src={`/src/assets/1 (3).jpg`} alt={`${r.name} - Ko Lake luxury accommodation Ahangama`} />
+              <img src={Room1Img} alt={`${r.name} - Ko Lake luxury accommodation Ahangama`} />
               <div className="pad">
                 <h3>{r.name}</h3>
                 <p className="muted" style={{ marginTop: 6 }}>{r.blurb}</p>
@@ -305,15 +314,15 @@ export default function SimpleHome() {
           <h2 style={{ marginTop: 0, fontSize: 28 }}>Gallery</h2>
           <div className="masonry" style={{ marginTop: 16 }}>
             {[
-              "/src/assets/1 (3).jpg",
-              "/src/assets/2 (5).jpg",
-              "/src/assets/3 (3).jpg",
-              "/src/assets/4 (3).jpg",
-              "/src/assets/6 (1).jpg",
-              "/src/assets/8 (1).jpg",
-              "/src/assets/9.jpg",
-              "/src/assets/PoolSunset.jpg",
-              "/src/assets/KoLakeSunset.jpeg"
+              Room1Img,
+              Room2Img,
+              Room3Img,
+              Room4Img,
+              Room6Img,
+              Room8Img,
+              Room9Img,
+              PoolSunsetImg,
+              KoLakeSunsetImg
             ].map((src, i) => (
               <figure key={i}><img src={src} alt={`Gallery ${i + 1}`} /></figure>
             ))}
