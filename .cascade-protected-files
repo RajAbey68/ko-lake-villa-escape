@@ -1,0 +1,26 @@
+# PROTECTED FILES - DO NOT MODIFY WITHOUT EXPLICIT USER REQUEST
+# These files control the visual appearance and must remain stable
+
+## CSS & Styling
+src/index.css
+src/App.css
+tailwind.config.js
+
+## Core UI Components
+src/components/Navigation.tsx
+src/components/DataDrivenHero.tsx
+src/pages/Index.tsx
+
+## Layout Components
+src/components/Rooms.tsx
+src/components/Gallery.tsx
+src/components/DataDrivenAmenities.tsx
+src/components/DataDrivenLocation.tsx
+src/components/KoLakeContact.tsx
+
+## Rules:
+1. Never modify these files unless user explicitly requests changes
+2. If components crash, fix the DATA LAYER (hooks), not the components
+3. Add fallback data to hooks, never change component structure
+4. Test all changes in isolation before applying
+5. Always preserve className attributes and styling
