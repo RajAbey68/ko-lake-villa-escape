@@ -36,6 +36,8 @@ export const isImageItem = (item: GalleryItem): boolean => {
 };
 
 // Get all gallery items (both images and videos)
+const FALLBACK_GALLERY: GalleryItem[] = [];
+
 export const useGallery = () => {
   return useQuery({
     queryKey: ['gallery-items'],
@@ -48,11 +50,9 @@ export const useGallery = () => {
       
       if (error) {
         console.error('Gallery fetch error:', error);
-        throw error;
+        return FALLBACK_GALLERY;
       }
-      
-      console.log('Gallery items fetched:', data?.length || 0);
-      return (data as GalleryItem[]) || [];
+      return (data && data.length > 0) ? data as GalleryItem[] : FALLBACK_GALLERY;
     },
   });
 };

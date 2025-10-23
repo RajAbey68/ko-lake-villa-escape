@@ -15,6 +15,8 @@ export interface LocationInfo {
   updated_at: string;
 }
 
+const FALLBACK_LOCATION: LocationInfo[] = [];
+
 export const useLocationInfo = () => {
   return useQuery({
     queryKey: ["location-info"],
@@ -23,15 +25,13 @@ export const useLocationInfo = () => {
         .from("location_info")
         .select("*")
         .eq("is_active", true)
-        .limit(1)
-        .single();
-      
+        .order("display_order", { ascending: true });
+
       if (error) {
         console.error("Error fetching location info:", error);
-        throw error;
+        return FALLBACK_LOCATION;
       }
-      
-      return data as LocationInfo;
+      return (data && data.length > 0) ? data as LocationInfo[] : FALLBACK_LOCATION;
     },
   });
 };

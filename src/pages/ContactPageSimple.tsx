@@ -4,6 +4,13 @@ import { Navigation } from "@/components/Navigation";
 import { supabase } from "@/integrations/supabase/client";
 import { useContacts } from "@/hooks/useContacts";
 
+const FAQ_ITEMS = [
+  { q: "What's the best way to contact you?", a: "WhatsApp is fastest - we usually respond within 1 hour!" },
+  { q: "Do you offer airport pickup?", a: "Yes! Contact us for rates and scheduling." },
+  { q: "Can I book directly?", a: "Absolutely! Direct bookings save 5-12% compared to booking platforms." },
+  { q: "What languages do you speak?", a: "English, Sinhala, and Tamil. Some staff also speak German and French." }
+];
+
 export default function ContactPageSimple() {
   const { data: contacts, isLoading: contactsLoading } = useContacts();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,15 +24,41 @@ export default function ContactPageSimple() {
     message: ""
   });
   const [formStatus, setFormStatus] = useState<{type: 'success' | 'error', message: string} | null>(null);
+  const [emailError, setEmailError] = useState("");
+  const [phoneWarning, setPhoneWarning] = useState("");
   
   const handleBookingClick = () => {
     document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const phoneRegex = /^\d{7,15}$/;
+    return phoneRegex.test(phone.replace(/\s+/g, ''));
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setFormStatus(null);
+    setEmailError("");
+    setPhoneWarning("");
+    
+    // Validate email
+    if (!validateEmail(formData.email)) {
+      setEmailError("Please enter a valid email address");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate phone (warn but don't block)
+    if (!validatePhone(formData.phone)) {
+      setPhoneWarning("Phone number format may be incorrect");
+    }
     
     try {
       const { error } = await supabase
@@ -80,6 +113,11 @@ export default function ContactPageSimple() {
         .alert{padding:12px;border-radius:8px;margin-bottom:16px}
         .alert-success{background:#d1fae5;border:1px solid #10b981;color:#065f46}
         .alert-error{background:#fee2e2;border:1px solid #ef4444;color:#991b1b}
+        .alert-warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e}
+        .faq-item{padding:20px;background:var(--wash);border-radius:12px;border:1px solid var(--line);margin-bottom:16px}
+        .faq-q{font-weight:600;margin-bottom:8px;font-size:16px}
+        .faq-a{color:var(--muted);font-size:14px}
+        .emergency-banner{background:linear-gradient(135deg,#fef3c7 0%,#fed7aa 100%);padding:24px;border-radius:16px;border:2px solid #f59e0b;text-align:center;margin-top:48px}
       `}</style>
 
       <Navigation onBookingClick={handleBookingClick} />
@@ -141,6 +179,22 @@ export default function ContactPageSimple() {
                 💬 WhatsApp Us Now
               </a>
             </div>
+          </div>
+        </div>
+
+        {/* WhatsApp Group Join */}
+        <div style={{marginTop:64,textAlign:"center"}}>
+          <div className="contact-card" style={{maxWidth:600,margin:"0 auto",background:"linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%)"}}>
+            <div style={{fontSize:48,marginBottom:16}}>💬</div>
+            <h3 style={{fontSize:24,fontWeight:700,marginBottom:8}}>Join Our WhatsApp Group</h3>
+            <p style={{color:"var(--muted)",marginBottom:20}}>Get instant updates, special offers, and 24/7 support from our team</p>
+            <a 
+              href="https://chat.whatsapp.com/YOUR_GROUP_INVITE_LINK" 
+              className="btn" 
+              style={{background:"#25D366",color:"white",border:"none",fontSize:18,padding:"16px 32px"}}
+            >
+              💬 Join WhatsApp Group
+            </a>
           </div>
         </div>
 
@@ -209,6 +263,19 @@ export default function ContactPageSimple() {
               })}
             </div>
           )}
+        </div>
+
+        {/* FAQ Section */}
+        <div style={{marginTop:64}}>
+          <h2 style={{fontSize:28,margin:"0 0 24px",textAlign:"center"}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth:800,margin:"0 auto"}}>
+            {FAQ_ITEMS.map((item, idx) => (
+              <div key={idx} className="faq-item">
+                <div className="faq-q">{item.q}</div>
+                <div className="faq-a">{item.a}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div style={{marginTop:64}}>
@@ -303,9 +370,18 @@ export default function ContactPageSimple() {
                   type="email" 
                   className="field" 
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => {
+                    setFormData({...formData, email: e.target.value});
+                    setEmailError("");
+                  }}
+                  style={{borderColor: emailError ? "#ef4444" : "var(--line)"}}
                   required 
                 />
+                {emailError && (
+                  <div className="alert alert-error" style={{marginTop:8}}>
+                    {emailError}
+                  </div>
+                )}
               </div>
 
               <div style={{marginBottom:16}}>
@@ -344,11 +420,19 @@ export default function ContactPageSimple() {
                     className="field" 
                     placeholder="Phone number"
                     value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    style={{flex:1}}
+                    onChange={(e) => {
+                      setFormData({...formData, phone: e.target.value});
+                      setPhoneWarning("");
+                    }}
+                    style={{flex:1,borderColor: phoneWarning ? "#f59e0b" : "var(--line)"}}
                     required 
                   />
                 </div>
+                {phoneWarning && (
+                  <div className="alert alert-warning" style={{marginTop:8}}>
+                    ⚠️ {phoneWarning}
+                  </div>
+                )}
               </div>
 
               <div style={{marginBottom:16}}>
@@ -395,6 +479,20 @@ export default function ContactPageSimple() {
               </button>
             </form>
           </div>
+        </div>
+
+        {/* 24/7 Emergency Contact */}
+        <div className="emergency-banner">
+          <div style={{fontSize:40,marginBottom:12}}>🚨</div>
+          <h3 style={{fontSize:24,fontWeight:700,marginBottom:8,color:"#92400e"}}>24/7 Emergency Contact</h3>
+          <p style={{color:"#92400e",marginBottom:16}}>For urgent matters outside business hours</p>
+          <a 
+            href="https://wa.me/94711730345?text=EMERGENCY:%20" 
+            style={{color:"#d26a1b",fontWeight:700,fontSize:20}}
+          >
+            📱 +94 71 173 0345
+          </a>
+          <div style={{fontSize:14,color:"#92400e",marginTop:8}}>Available 24/7 via WhatsApp</div>
         </div>
       </main>
     </>

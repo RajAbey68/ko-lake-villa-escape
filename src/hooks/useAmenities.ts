@@ -15,6 +15,8 @@ export interface Amenity {
   updated_at: string;
 }
 
+const FALLBACK_AMENITIES: Amenity[] = [];
+
 export const useAmenities = () => {
   return useQuery({
     queryKey: ["amenities"],
@@ -24,13 +26,12 @@ export const useAmenities = () => {
         .select("*")
         .eq("is_active", true)
         .order("display_order", { ascending: true });
-      
+
       if (error) {
         console.error("Error fetching amenities:", error);
-        throw error;
+        return FALLBACK_AMENITIES;
       }
-      
-      return data as Amenity[];
+      return (data && data.length > 0) ? data as Amenity[] : FALLBACK_AMENITIES;
     },
   });
 };

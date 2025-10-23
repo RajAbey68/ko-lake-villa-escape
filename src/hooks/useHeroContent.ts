@@ -16,6 +16,23 @@ export interface HeroContent {
   updated_at: string;
 }
 
+const FALLBACK_HERO_CONTENT: HeroContent[] = [
+  {
+    id: "1",
+    title: "Lakeside Holiday Rental in Sri Lanka",
+    subtitle: "Ko Lake • Ahangama",
+    description: "7-room luxury villa on Koggala Lake. Perfect for families, surfers & digital nomads. Private chef, pool, near surf breaks.",
+    image_url: "/src/assets/KoLakeSunset.jpeg",
+    image_alt: "Ko Lake Villa Sunset View",
+    cta_text: "Book Now",
+    cta_action: "booking",
+    is_active: true,
+    display_order: 1,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  }
+];
+
 export const useHeroContent = () => {
   return useQuery({
     queryKey: ["hero-content"],
@@ -28,10 +45,10 @@ export const useHeroContent = () => {
       
       if (error) {
         console.error("Error fetching hero content:", error);
-        throw error;
+        return FALLBACK_HERO_CONTENT;
       }
       
-      return data as HeroContent[];
+      return (data && data.length > 0) ? data as HeroContent[] : FALLBACK_HERO_CONTENT;
     },
   });
 };
