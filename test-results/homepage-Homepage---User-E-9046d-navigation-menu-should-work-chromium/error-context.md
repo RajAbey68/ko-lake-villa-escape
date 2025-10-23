@@ -1,0 +1,188 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "Ko Lake - Fisherman Logo Ko Lake • Ahangama" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e8]:
+              - img "Ko Lake - Fisherman Logo" [ref=e9]
+              - generic [ref=e10]: Ko Lake • Ahangama
+          - generic [ref=e11]:
+            - link "+94711730345" [ref=e12] [cursor=pointer]:
+              - /url: tel:+94711730345
+              - img [ref=e13]
+              - generic [ref=e15]: "+94711730345"
+            - link "contact@KoLakeHouse.com" [ref=e16] [cursor=pointer]:
+              - /url: mailto:contact@KoLakeHouse.com
+              - img [ref=e17]
+              - generic [ref=e20]: contact@KoLakeHouse.com
+        - generic [ref=e21]:
+          - navigation "Main" [ref=e22]:
+            - list [ref=e24]:
+              - listitem [ref=e25]:
+                - link "Home" [ref=e26] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e27]:
+                - link "Accommodation" [ref=e28] [cursor=pointer]:
+                  - /url: /accommodation
+              - listitem [ref=e29]:
+                - link "Gallery" [ref=e30] [cursor=pointer]:
+                  - /url: /gallery
+              - listitem [ref=e31]:
+                - link "Experiences" [ref=e32] [cursor=pointer]:
+                  - /url: /experiences
+              - listitem [ref=e33]:
+                - link "Deals" [ref=e34] [cursor=pointer]:
+                  - /url: /deals
+              - listitem [ref=e35]:
+                - link "Contact" [ref=e36] [cursor=pointer]:
+                  - /url: /contact
+          - generic [ref=e38]:
+            - link "Staff Login" [ref=e39] [cursor=pointer]:
+              - /url: /auth
+            - button "Book Now" [ref=e40] [cursor=pointer]
+    - main [ref=e41]:
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - paragraph [ref=e47]: Ko Lake • Ahangama
+          - heading "Lakeside Holiday Rental in Sri Lanka" [level=1] [ref=e48]
+        - paragraph [ref=e49]: 7-room luxury villa on Koggala Lake. Perfect for families, surfers & digital nomads. Private chef, pool, near surf breaks.
+        - generic [ref=e50]:
+          - button "Book Now" [ref=e51] [cursor=pointer]
+          - button "Explore Rooms" [ref=e52] [cursor=pointer]
+      - generic [ref=e53]: stats
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - heading "Our Luxury Accommodations" [level=2] [ref=e57]
+          - paragraph [ref=e58]: Choose from our carefully designed rooms and villas, each offering unique views and premium amenities
+        - paragraph [ref=e60]: No rooms available at the moment.
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - heading "Gallery" [level=2] [ref=e64]
+          - paragraph [ref=e65]: Discover the beauty of Ko Lake Villa through our curated collection of images and videos
+        - generic [ref=e66]:
+          - paragraph [ref=e67]: No gallery items available.
+          - paragraph [ref=e68]: Check back soon for beautiful images and videos!
+      - generic [ref=e71]:
+        - heading "Resort Facilities" [level=3] [ref=e102]
+        - heading "Comfort & Luxury" [level=3] [ref=e126]
+        - heading "Activities & Experiences" [level=3] [ref=e150]
+      - generic [ref=e173]:
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=2]
+      - generic [ref=e175]:
+        - generic [ref=e176]:
+          - heading "Contact Us" [level=2] [ref=e177]
+          - paragraph [ref=e178]: Get in touch for reservations, inquiries, or any assistance you need
+        - generic [ref=e179]:
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - generic [ref=e182]:
+                - heading "Ready to Book?" [level=3] [ref=e183]
+                - paragraph [ref=e184]: Reserve your stay at Ko Lake Villa today
+              - button "Book Your Stay Now" [ref=e186] [cursor=pointer]
+            - generic [ref=e187]:
+              - generic [ref=e188]:
+                - generic [ref=e190]:
+                  - img [ref=e192]
+                  - heading "Manager WhatsApp" [level=3] [ref=e194]
+                - generic [ref=e195]:
+                  - generic [ref=e196]:
+                    - paragraph [ref=e197]: "PLACEHOLDER: Manager WhatsApp"
+                    - paragraph [ref=e198]: Available 24/7
+                  - button "WhatsApp" [disabled]:
+                    - img
+                    - text: WhatsApp
+              - generic [ref=e199]:
+                - generic [ref=e201]:
+                  - img [ref=e203]
+                  - heading "Villa Team Leader" [level=3] [ref=e205]
+                - generic [ref=e207]:
+                  - paragraph [ref=e208]: "PLACEHOLDER: Team Leader Phone"
+                  - paragraph [ref=e209]: On-site assistance
+              - generic [ref=e210]:
+                - generic [ref=e212]:
+                  - img [ref=e214]
+                  - heading "Email" [level=3] [ref=e217]
+                - generic [ref=e219]:
+                  - paragraph [ref=e220]:
+                    - link "contact@koLakeHouse.com" [ref=e221] [cursor=pointer]:
+                      - /url: mailto:contact@koLakeHouse.com
+                  - paragraph [ref=e222]: General inquiries
+              - generic [ref=e223]:
+                - generic [ref=e225]:
+                  - img [ref=e227]
+                  - heading "WhatsApp Group" [level=3] [ref=e229]
+                - generic [ref=e230]:
+                  - generic [ref=e231]:
+                    - paragraph [ref=e232]: Join our guest group
+                    - paragraph [ref=e233]: Instant support & updates
+                  - button "Join Group" [disabled]:
+                    - img
+                    - text: Join Group
+              - generic [ref=e234]:
+                - generic [ref=e236]:
+                  - img [ref=e238]
+                  - heading "Owner Contact" [level=3] [ref=e240]
+                - generic [ref=e242]:
+                  - paragraph [ref=e243]: "PLACEHOLDER: Owner contact"
+                  - paragraph [ref=e244]: Direct line
+              - generic [ref=e245]:
+                - generic [ref=e247]:
+                  - img [ref=e249]
+                  - heading "Address" [level=3] [ref=e252]
+                - generic [ref=e254]:
+                  - paragraph [ref=e255]: Koggala Lake
+                  - paragraph [ref=e256]: Ahangama
+                  - paragraph [ref=e257]: Southern Province, Sri Lanka
+          - generic [ref=e258]:
+            - generic [ref=e259]:
+              - heading "Send us a Message" [level=3] [ref=e260]
+              - paragraph [ref=e261]: Have a question or special request? We'd love to hear from you.
+            - generic [ref=e263]:
+              - generic [ref=e264]:
+                - generic [ref=e265]:
+                  - text: First Name
+                  - textbox "First Name" [ref=e266]
+                - generic [ref=e267]:
+                  - text: Last Name
+                  - textbox "Last Name" [ref=e268]
+              - generic [ref=e269]:
+                - text: Email
+                - textbox "Email" [ref=e270]
+              - generic [ref=e271]:
+                - text: Phone Number (Required)
+                - generic [ref=e272]:
+                  - combobox [ref=e273] [cursor=pointer]:
+                    - generic: 🇱🇰 Sri Lanka +94
+                    - img [ref=e274]
+                  - combobox [ref=e276]
+                  - textbox "Phone Number (Required)" [ref=e277]:
+                    - /placeholder: Phone number
+              - generic [ref=e278]:
+                - text: Subject
+                - combobox [ref=e279] [cursor=pointer]:
+                  - generic: Select a subject
+                  - img [ref=e280]
+                - combobox [ref=e282]
+              - generic [ref=e283]:
+                - text: Message
+                - textbox "Message" [ref=e284]:
+                  - /placeholder: Tell us about your inquiry or special requests...
+              - button "Send Message" [ref=e285] [cursor=pointer]:
+                - img
+                - text: Send Message
+        - generic [ref=e286]:
+          - heading "24/7 Emergency Contact" [level=3] [ref=e287]
+          - paragraph [ref=e288]: For urgent matters outside business hours
+          - generic [ref=e289]:
+            - img [ref=e290]
+            - text: "PLACEHOLDER: Emergency contact number"
+```

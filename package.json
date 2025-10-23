@@ -11,7 +11,10 @@
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "db:setup": "node scripts/setup-database.js",
+    "db:seed": "node scripts/seed-database.js",
+    "setup": "npm run db:setup && npm run db:seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
