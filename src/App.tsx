@@ -19,6 +19,7 @@ import DealsPageSimple from "./pages/DealsPageSimple";
 import ContactPageSimple from "./pages/ContactPageSimple";
 import ContactPageNew from "./pages/ContactPageNew";
 import SimpleImageUpload from "./pages/SimpleImageUpload";
+import DirectImageUpload from "./pages/DirectImageUpload";
 import TestSetup from "./pages/TestSetup";
 import AuthPage from "./pages/AuthPage";
 import AdminPage from "./pages/AdminPage";
@@ -51,7 +52,7 @@ const App = () => (
             <Route path="/contact" element={<ContactPageNew />} />
             <Route path="/contact-old" element={<ContactPageSimple />} />
             <Route path="/contact-admin" element={<ContactPage />} />
-            <Route path="/upload" element={<SimpleImageUpload />} />
+            <Route path="/upload" element={<DirectImageUpload />} />
             <Route path="/test" element={<TestSetup />} />
             <Route path="/book" element={<BookingPage />} />
             <Route path="/auth" element={<AuthPage />} />
