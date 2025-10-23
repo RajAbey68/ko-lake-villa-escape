@@ -172,14 +172,34 @@ export default function SimpleImageUpload() {
 
         {error && (
           <div style={{
-            padding: '16px',
+            padding: '24px',
             background: '#fee2e2',
-            border: '1px solid #ef4444',
-            borderRadius: '8px',
-            marginBottom: '24px',
-            color: '#991b1b'
+            border: '2px solid #ef4444',
+            borderRadius: '12px',
+            marginBottom: '24px'
           }}>
-            ❌ {error}
+            <h3 style={{ color: '#991b1b', fontWeight: '700', marginBottom: '12px', fontSize: '18px' }}>
+              ❌ Upload Failed
+            </h3>
+            <p style={{ color: '#991b1b', marginBottom: '16px' }}>
+              {error}
+            </p>
+            <div style={{
+              background: '#fff',
+              padding: '16px',
+              borderRadius: '8px',
+              border: '1px solid #fca5a5'
+            }}>
+              <h4 style={{ fontWeight: '700', marginBottom: '8px', color: '#7f1d1d' }}>
+                🔧 Fix Required:
+              </h4>
+              <ol style={{ color: '#7f1d1d', lineHeight: '1.8', paddingLeft: '20px', margin: 0 }}>
+                <li>Open Supabase Dashboard → SQL Editor</li>
+                <li>Copy & paste file: <code style={{ background: '#fef2f2', padding: '2px 6px', borderRadius: '4px' }}>COMPLETE_SETUP.sql</code></li>
+                <li>Click "Run" button</li>
+                <li>Refresh this page and try again</li>
+              </ol>
+            </div>
           </div>
         )}
 
