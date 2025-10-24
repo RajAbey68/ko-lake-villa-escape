@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
-import { DataDrivenHero } from "@/components/DataDrivenHero";
+import { KoLakeHero } from "@/components/KoLakeHero";
 import { Rooms } from "@/components/Rooms";
 import { Gallery } from "@/components/Gallery";
 import { DataDrivenAmenities } from "@/components/DataDrivenAmenities";
@@ -18,7 +18,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navigation onBookingClick={handleBookingClick} />
       <main>
-        <DataDrivenHero onBookingClick={handleBookingClick} />
+        <KoLakeHero onBookingClick={handleBookingClick} />
         {/* Stats placeholder for E2E (non-visual) */}
         <div data-testid="stats" className="sr-only">stats</div>
         <Rooms onBookingClick={handleBookingClick} />
