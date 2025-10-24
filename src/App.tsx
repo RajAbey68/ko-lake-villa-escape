@@ -49,8 +49,8 @@ const App = () => (
             <Route path="/amenities-admin" element={<ExperiencesPage />} />
             <Route path="/deals" element={<DealsPageSimple />} />
             <Route path="/deals-admin" element={<DealsPage />} />
-            <Route path="/contact" element={<ContactPageNew />} />
-            <Route path="/contact-old" element={<ContactPageSimple />} />
+            <Route path="/contact" element={<ContactPageSimple />} />
+            <Route path="/contact-new" element={<ContactPageNew />} />
             <Route path="/contact-admin" element={<ContactPage />} />
             <Route path="/upload" element={<DirectImageUpload />} />
             <Route path="/test" element={<TestSetup />} />
