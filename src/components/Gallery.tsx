@@ -1,16 +1,51 @@
-import { useState } from "react";
+// Gallery.tsx — Storage-based public gallery (no database table required)
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { VideoThumbnail } from "@/components/ui/video-thumbnail";
-import { useGallery, isVideoItem, type GalleryItem } from "@/hooks/useGallery";
+import { supabase } from "@/integrations/supabase/client";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+
+type GalleryItem = {
+  id: string;
+  name: string;
+  url: string;
+  isVideo: boolean;
+};
+
+const BUCKET = 'gallery';
+const PREFIX = 'images/';
+
+async function listGallery(): Promise<GalleryItem[]> {
+  const { data, error } = await supabase
+    .storage
+    .from(BUCKET)
+    .list(PREFIX, { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
+
+  if (error) throw error;
+
+  return (data ?? [])
+    .filter(e => e?.name && e.name !== '.emptyFolderPlaceholder')
+    .map((e) => {
+      const path = `${PREFIX}${e.name}`;
+      const pub = supabase.storage.from(BUCKET).getPublicUrl(path).data?.publicUrl ?? '';
+      const isVideo = /\.(mp4|webm|mov|avi)$/i.test(e.name!);
+      return { id: path, name: e.name!, url: pub, isVideo };
+    });
+}
 
 export const Gallery = () => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  // Fetch all gallery items (both images and videos)
-  const { data: galleryItems = [], isLoading: loading, error } = useGallery();
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    listGallery()
+      .then(setGalleryItems)
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, []);
 
   const openLightbox = (item: GalleryItem, index: number) => {
     setSelectedItem(item);
@@ -86,47 +121,40 @@ export const Gallery = () => {
             {galleryItems.map((item, index) => (
               <div
                 key={item.id}
-                className="relative gallery-item cursor-pointer rounded-lg overflow-hidden shadow-medium hover:shadow-large"
+                className="relative gallery-item cursor-pointer rounded-lg overflow-hidden shadow-medium hover:shadow-large transition-shadow"
                 onClick={() => openLightbox(item, index)}
                 data-testid={`gallery-item-${item.id}`}
               >
-                {isVideoItem(item) ? (
-                  <VideoThumbnail
-                    src={item.object_path}
-                    thumbnail={item.thumbnail_path}
-                    title={item.title}
-                    className="w-full h-full"
-                    aspectRatio="square"
-                    onPlay={() => openLightbox(item, index)}
-                    data-testid={`gallery-video-${item.id}`}
-                  />
-                ) : (
-                  <img
-                    src={item.object_path}
-                    alt={item.title}
-                    className="w-full h-full object-cover aspect-square"
-                    loading="lazy"
-                    data-testid={`gallery-image-${item.id}`}
-                    onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/fallback.jpg'; }}
-                  />
-                )}
-                
-                {/* Info Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 smooth-transition">
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <h3 className="font-semibold text-lg">{item.title}</h3>
-                    {item.description && (
-                      <p className="text-sm opacity-90 mt-1 line-clamp-2">{item.description}</p>
-                    )}
+                <div className="aspect-square overflow-hidden bg-muted">
+                  {item.isVideo ? (
+                    <>
+                      <video
+                        src={item.url}
+                        className="w-full h-full object-cover"
+                        muted
+                        playsInline
+                        loop
+                      />
+                      <div className="absolute bottom-2 right-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
+                        ▶ Video
+                      </div>
+                    </>
+                  ) : (
+                    <img
+                      src={item.url}
+                      alt={item.name}
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                      loading="lazy"
+                    />
+                  )}
+                </div>
+                <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                  <div className="opacity-0 hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg">
+                      <p className="text-sm font-semibold text-foreground">{item.name}</p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Featured Badge */}
-                {item.is_featured && (
-                  <div className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded">
-                    Featured
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -138,75 +166,68 @@ export const Gallery = () => {
         )}
 
         {/* Lightbox Modal */}
-        <Dialog open={!!selectedItem} onOpenChange={() => closeLightbox()}>
-          <DialogContent className="max-w-5xl w-full h-[90vh] p-0">
-            <div className="relative w-full h-full flex items-center justify-center bg-black">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
-                onClick={closeLightbox}
-              >
-                <X className="h-6 w-6" />
-              </Button>
-              
-              {selectedItem && (
-                <>
-                  {isVideoItem(selectedItem) ? (
+        {selectedItem && (
+          <Dialog open={!!selectedItem} onOpenChange={closeLightbox}>
+            <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-2 right-2 z-10 bg-black/50 hover:bg-black/70 text-white"
+                  onClick={closeLightbox}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+                
+                <div className="flex items-center justify-center bg-black min-h-[60vh]">
+                  {selectedItem.isVideo ? (
                     <video
-                      src={selectedItem.object_path}
+                      src={selectedItem.url}
                       controls
-                      className="max-w-full max-h-full"
                       autoPlay
-                      poster={selectedItem.thumbnail_path || undefined}
-                      data-testid="lightbox-video"
-                      onError={e => { console.error('Video failed to load:', selectedItem.object_path); }}
+                      className="max-w-full max-h-[80vh] object-contain"
                     />
                   ) : (
                     <img
-                      src={selectedItem.object_path}
-                      alt={selectedItem.title}
-                      className="max-w-full max-h-full object-contain"
-                      data-testid="lightbox-image"
-                      onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = '/fallback.jpg'; }}
+                      src={selectedItem.url}
+                      alt={selectedItem.name}
+                      className="max-w-full max-h-[80vh] object-contain"
                     />
                   )}
-                  
-                  {galleryItems.length > 1 && (
-                    <>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20"
-                        onClick={prevImage}
-                      >
-                        <ChevronLeft className="h-8 w-8" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20"
-                        onClick={nextImage}
-                      >
-                        <ChevronRight className="h-8 w-8" />
-                      </Button>
-                    </>
-                  )}
-                  
-                  <div className="absolute bottom-4 left-4 right-4 text-white text-center">
-                    <h3 className="text-xl font-semibold">{selectedItem.title}</h3>
-                    {selectedItem.description && (
-                      <p className="text-sm opacity-90 mt-2">{selectedItem.description}</p>
-                    )}
-                    <p className="text-xs opacity-70 mt-2">
-                      {currentIndex + 1} of {galleryItems.length}
-                    </p>
-                  </div>
-                </>
-              )}
-            </div>
-          </DialogContent>
-        </Dialog>
+                </div>
+
+                <div className="absolute top-1/2 left-2 transform -translate-y-1/2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="bg-black/50 hover:bg-black/70 text-white"
+                    onClick={prevImage}
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </Button>
+                </div>
+
+                <div className="absolute top-1/2 right-2 transform -translate-y-1/2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="bg-black/50 hover:bg-black/70 text-white"
+                    onClick={nextImage}
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </Button>
+                </div>
+
+                <div className="bg-black/80 text-white p-4">
+                  <h3 className="text-lg font-semibold">{selectedItem.name}</h3>
+                  <p className="text-sm text-gray-400 mt-1">
+                    {currentIndex + 1} of {galleryItems.length}
+                  </p>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
     </section>
   );

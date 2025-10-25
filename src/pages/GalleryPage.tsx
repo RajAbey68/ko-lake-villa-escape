@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
-import { Gallery } from "@/components/Gallery";
-import { AdminGallery } from "@/components/admin/AdminGallery";
+import { PublicGallery, AdminGallery } from "@/components/GalleryModule";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
@@ -48,7 +47,7 @@ const GalleryPage = () => {
     <div className="min-h-screen bg-background">
       <Navigation onBookingClick={handleBookingClick} />
       <main>
-        <Gallery />
+        <PublicGallery />
       </main>
     </div>
   );
